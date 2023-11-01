@@ -1,0 +1,15 @@
+- name: Install System Packages
+  apt: name={{item}}
+  with_items:
+    - build-essential
+    - sudo
+    - man
+    - git
+    - curl
+    - vim
+    - rsync
+    - fzf
+    - tldr
+  tags:
+    - install
+    - core

@@ -1,0 +1,15 @@
+- name: Installing stow
+  apt: name=stow
+  tags:
+    - install
+    - dotfiles
+- name: Coping dotfiles folder
+  shell: rsync -r /usr/local/bin/dotfiles/ $HOME/.dotfiles
+  tags:
+    - install
+    - dotfiles
+- name: Stow dotfiles
+  shell: cd $HOME/.dotfiles && ./ubuntu
+  tags:
+    - install
+    - dotfiles

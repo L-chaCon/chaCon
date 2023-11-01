@@ -1,0 +1,13 @@
+- hosts: localhost
+  become: true
+  pre_tasks:
+    - name: Update cache
+      apt:
+        update_cache: true
+      tags:
+        - install
+  tasks:
+    - import_tasks: tasks/core-setup.yml
+    - import_tasks: tasks/zsh.yml
+    - import_tasks: tasks/tmux.yml
+    - import_tasks: tasks/dotfiles.yml
