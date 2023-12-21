@@ -10,6 +10,7 @@
     - rsync
     - fzf
     - tldr
+    - tree
   tags:
     - install
     - core

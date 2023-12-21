@@ -4,7 +4,7 @@
     - install
     - dotfiles
 - name: Coping dotfiles folder
-  shell: rsync -r /usr/local/bin/dotfiles/ $HOME/.dotfiles
+  shell: rsync -r ~/.chaCon/dotfiles/ $HOME/.dotfiles
   tags:
     - install
     - dotfiles

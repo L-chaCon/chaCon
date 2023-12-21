@@ -7,4 +7,9 @@ if [[ -z $DOTFILES ]]; then
     DOTFILES=$HOME/.dotfiles
 fi
 
-STOW_FOLDERS=$STOW_FOLDERS DOTFILES=$DOTFILES $DOTFILES/install
+cd $DOTFILES
+for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
+do
+    echo "stow -D $folder -t $HOME"
+    stow -D $folder -t $HOME
+done

@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+#!/usr/bin/env zsh
 if [[ -z $STOW_FOLDERS ]]; then
     STOW_FOLDERS="tmux,bin,zsh"
 fi
@@ -8,6 +9,7 @@ if [[ -z $DOTFILES ]]; then
 fi
 
 cd $DOTFILES
+
 for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
 do
     echo "stow $folder -t $HOME"
