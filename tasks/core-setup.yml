@@ -14,3 +14,8 @@
   tags:
     - install
     - core
+- name: Create personal folder
+  shell: mkdir $HOME/work && mkdir $HOME/projects && mkdir $HOME/personal
+  tags:
+    - create
+    - personal

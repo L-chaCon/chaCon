@@ -1,5 +1,11 @@
 - hosts: localhost
   become: true
+  vars_files:
+    - vars/main.yml
+  vars_prompt:
+    - name: "vault_password"
+      prompt: "Enter Vault Pasword"
+      private: yes
   pre_tasks:
     - name: Update cache
       apt:
@@ -9,5 +15,8 @@
   tasks:
     - import_tasks: tasks/core-setup.yml
     - import_tasks: tasks/zsh.yml
-    - import_tasks: tasks/tmux.yml
     - import_tasks: tasks/dotfiles.yml
+    - import_tasks: tasks/tmux.yml
+      # - import_tasks: tasks/nvim.yml
+
+#   - import_tasks: tasks/dotfiles.yml
