@@ -5,4 +5,4 @@ RUN apt-get update; \
 
 WORKDIR /root
 COPY . /root/.chaConfig
-# RUN ansible-playbook .chaConfig/local.yml
+RUN ansible-playbook .chaConfig/local.yml
