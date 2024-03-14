@@ -35,29 +35,22 @@ brew install git
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-### Install PowerLevel10k
+### Dependencias de Plugins
 
 ```
-git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+brew install fzf
 ```
 
 ### Edit ~/.zshrc
 
 ```
-ZSH_THEME="powerlevel10k/powerlevel10k"
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf)
 source ~/.zshrc
 ```
 
 ### Configurar el Theme
-
-Seleccionar las opciones, estas son las mias
-
-```
-p10k configure
-yyyy214n1141111n1y
-```
-
-para el theme de color yo uso tokyonight-storm
 
 ```
 curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/tokyonight-storm.itermcolors --output ~/Downloads/tokyonight-storm.itermcolors
@@ -86,20 +79,11 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 ## Nvim
 
 ```
-
-```
-
-```
 brew install ripgrep fd
 ```
 
-Para el mac que estoy ocupando, estas son algunas de las cosas que he instalado para la configuracion.
-TODO - hacer la misma congifuracion pero para Mac
+### go-delve
 
-TMUX
-
-- brew install reattach-to-user-namespace
-
-ZSH
-
-- autoload -U compinit && compinit (dentro de .zshrc)
+```
+xcode-select --install
+```
