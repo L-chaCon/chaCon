@@ -1,0 +1,17 @@
+- name: Install System Packages
+  homebrew: 
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - git
+    - curl
+    - vim
+    - tree
+  tags:
+    - install
+    - core
+
+- name: Create personal folder
+  shell: mkdir -p $HOME/work && mkdir -p $HOME/projects && mkdir -p $HOME/personal
+  tags:
+    - personal

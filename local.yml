@@ -1,22 +1,60 @@
 - hosts: localhost
+  become_user: "{{ lookup('env', 'USER') }}"
   become: true
-  vars_files:
-    - vars/main.yml
-  vars_prompt:
-    - name: "vault_password"
-      prompt: "Enter Vault Pasword"
-      private: yes
+  # # TODO: ADD VAULT PASSWORD
+  # vars_prompt:
+  #   - name: "vault_password"
+  #     prompt: "Enter Vault Pasword"
+  #     private: yes
+  vars:
+    ansible_ssh_private_key_file: $HOME/.ssh/id_ed25519.pub
+
   pre_tasks:
     - name: Update cache
       apt:
         update_cache: true
       tags:
         - install
-  tasks:
-    - import_tasks: tasks/core-setup.yml
-    - import_tasks: tasks/zsh.yml
-    - import_tasks: tasks/dotfiles.yml
-    - import_tasks: tasks/tmux.yml
-    - import_tasks: tasks/nvim.yml
+      when: ansible_os_family == "Debian"
 
-#   - import_tasks: tasks/dotfiles.yml
+    - name: Update brew and upgrade all packages
+      shell: brew update && brew upgrade && brew upgrade --cask && brew cleanup
+      tags:
+        - install
+      become: false
+      when: ansible_os_family == "Darwin"
+
+  tasks:
+    # - block:
+    #   - name: Core Dependencies
+    #     ansible.builtin.import_tasks: tasks/linux/core-setup.yml
+    #
+    #   - name: Zsh Setup
+    #     ansible.builtin.import_tasks: tasks/linux/zsh.yml
+    #
+    #   - name: Dotfiles Setup 
+    #     ansible.builtin.import_tasks: tasks/linux/dotfiles.yml
+    #
+    #   - name: Tmux Setup 
+    #     ansible.builtin.import_tasks: tasks/linux/tmux.yml
+    #
+    #   - name: Neovim Setup
+    #     ansible.builtin.import_tasks: tasks/linux/nvim.yml
+    #   when: ansible_os_family == "Debian"
+
+    - block:
+      - name: Core Dependencies
+        ansible.builtin.import_tasks: tasks/iOS/core-setup.yml
+
+      - name: Zsh Setup
+        ansible.builtin.import_tasks: tasks/iOS/zsh.yml
+
+      - name: Dotfiles Setup 
+        ansible.builtin.import_tasks: tasks/iOS/dotfiles.yml
+
+      - name: Tmux Setup 
+        ansible.builtin.import_tasks: tasks/iOS/tmux.yml
+
+      - name: Neovim Setup
+        ansible.builtin.import_tasks: tasks/iOS/nvim.yml
+      when: ansible_os_family == "Darwin"

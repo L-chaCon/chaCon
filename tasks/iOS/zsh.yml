@@ -1,0 +1,61 @@
+- name: Install ZSH and Dependencies
+  homebrew: 
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - zsh
+    - fzf
+    - fd
+    - bat
+    - git-delta
+    - eza
+    - tldr
+    - zoxide
+  tags:
+    - install
+    - zsh
+- name: Check If Oh My Zsh Exist
+  stat:
+    path: "{{ lookup('env', 'HOME') }}/.oh-my-zsh"
+  register: oh_my_zsh_path
+- block:
+    - name: Install Oh My Zsh
+      shell: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      tags:
+        - install
+        - zsh
+    - name: Install Autosuggestions
+      git: 
+        repo: https://github.com/zsh-users/zsh-autosuggestions 
+        dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+        force: true
+      tags:
+        - install
+        - zsh
+    - name: Install Syntax Highlighting
+      git: 
+        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git 
+        dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+        force: true
+      tags:
+        - install
+        - zsh
+  when: not oh_my_zsh_path.stat.exists
+
+- name: Install Git fzf 
+  git:
+    repo: 'https://github.com/junegunn/fzf-git.sh.git'
+    dest: "{{ lookup('env','HOME') }}/.fzf-git.sh"
+    force: true
+  tags:
+    - install
+    - zsh
+
+- name: Create theme folder for bat
+  shell: mkdir -p "$(bat --config-dir)/themes"
+
+- name: Curl fly16 theme
+  shell: cd $(bat --config-dir)/themes && curl -O https://raw.githubusercontent.com/bluz71/fly16-bat/master/fly16.tmTheme
+
+- name: Build fly16 Theme
+  shell: cd $(bat --config-dir)/themes && bat cache --build 

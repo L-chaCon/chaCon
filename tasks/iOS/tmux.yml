@@ -1,0 +1,15 @@
+- name: Installing Tmux
+  homebrew: name=tmux
+  tags:
+    - install
+    - tmux
+- name: Plugging Tmux TPM
+  shell: mkdir $HOME/.tmux && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  tags:
+    - install
+    - tmux
+- name: Instaling gitmux
+  shell: brew tap arl/arl && brew install gitmux
+  tags:
+    - install
+    - tmux
