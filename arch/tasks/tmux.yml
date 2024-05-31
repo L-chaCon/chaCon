@@ -1,12 +1,8 @@
 - name: Installing Tmux
   pacman: tmux
-  tags:
-    - install
-    - tmux
+
 - name: Plugging Tmux TPM
   shell: mkdir $HOME/.tmux && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-  tags:
-    - install
-    - tmux
+
 - name: Instalar gitmux
-clonar la wea y correr go install
+  shell: yay -S gitmux

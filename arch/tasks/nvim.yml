@@ -1,11 +1,8 @@
 - name: Nvim prerequisites
   apt: name={{ item }}
   with_items:
-    - ninja-build
-    - unzip
-    - wget
-    - ripgrep 
-    - xclip
+    - neovim 
+    - python-pynvim
   tags:
     - install
     - nvim

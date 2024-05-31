@@ -1,14 +1,9 @@
 - hosts: localhost
-  # become_user: "{{ lookup('env', 'USER') }}"
   become: true
-  # # TODO: ADD VAULT PASSWORD
-  # vars_prompt:
-  #   - name: "vault_password"
-  #     prompt: "Enter Vault Pasword"
-  #     private: yes
   vars:
     ansible_ssh_private_key_file: $HOME/.ssh/id_ed25519
 
+  # TODO: GET THE VARIABLE $HOME
   pre_tasks:
     - name: Update brew and upgrade all packages
       shell: brew update && brew upgrade && brew upgrade --cask && brew cleanup
@@ -33,24 +28,36 @@
       - name: Zsh Setup
         ansible.builtin.import_tasks: arch/tasks/zsh.yml 
 
-      become_user: "{{ lookup('env', 'USER') }}"
-      become: true
+      - name: Alacritty Setup
+        ansible.builtin.import_tasks: arch/tasks/alacritty.yml 
+
+      - name: i3 Setup
+        ansible.builtin.import_tasks: arch/tasks/i3.yml
+
+      - name: Tmux Setup 
+        ansible.builtin.import_tasks: arch/tasks/gtmux.yml
+
+      - name: Dotfiles Setup 
+        ansible.builtin.import_tasks: arch/tasks/gdotfiles.yml
+
+      - name: Neovim Setup
+        ansible.builtin.import_tasks: arch/tasks/gnvim.yml
       when: ansible_os_family == "Archlinux"
 
-    # - block:
-    #   - name: Core Dependencies
-    #     ansible.builtin.import_tasks: iOS/tasks/gcore-setup.yml
-    #
-    #   - name: Zsh Setup
-    #     ansible.builtin.import_tasks: iOS/tasks/gzsh.yml
-    #
-    #   - name: Dotfiles Setup 
-    #     ansible.builtin.import_tasks: iOS/tasks/gdotfiles.yml
-    #
-    #   - name: Tmux Setup 
-    #     ansible.builtin.import_tasks: iOS/tasks/gtmux.yml
-    #
-    #   - name: Neovim Setup
-    #     ansible.builtin.import_tasks: iOS/tasks/gnvim.yml
-    #   become_user: "{{ lookup('env', 'USER') }}"
-    #   when: ansible_os_family == "Darwin"
+    - block:
+      - name: Core Dependencies
+        ansible.builtin.import_tasks: iOS/tasks/gcore-setup.yml
+
+      - name: Zsh Setup
+        ansible.builtin.import_tasks: iOS/tasks/gzsh.yml
+
+      - name: Dotfiles Setup 
+        ansible.builtin.import_tasks: iOS/tasks/gdotfiles.yml
+
+      - name: Tmux Setup 
+        ansible.builtin.import_tasks: iOS/tasks/gtmux.yml
+
+      - name: Neovim Setup
+        ansible.builtin.import_tasks: iOS/tasks/gnvim.yml
+      become_user: "{{ lookup('env', 'USER') }}"
+      when: ansible_os_family == "Darwin"
