@@ -1,11 +1,10 @@
 - name: Install ZSH
   apt: name=zsh
   tags:
-    - install
-    - zsh
-- name: Change shell to zsh
-  shell: chsh -s $(which zsh)
-  tags:
+Hay que6 agregar
+- fzf
+- fd
+- bat
     - install
     - zsh
 - name: Install Oh My Zsh
@@ -23,3 +22,7 @@
   tags:
     - install
     - zsh
+- name: Delete .zshrc
+  shell: rm ~/.zshrc
+- name: Install fzf Git
+  aqui tengo que clonar el fzf-git.sh

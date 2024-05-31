@@ -1,0 +1,10 @@
+- name: Installing stow
+  shell: yay -S stow
+  tags:
+    - install
+    - dotfiles
+- name: Stow dotfiles
+  shell: cd $HOME/.chaConfig/dotfiles
+  tags:
+    - install
+    - dotfiles

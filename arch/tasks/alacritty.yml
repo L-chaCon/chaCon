@@ -1,0 +1,9 @@
+- name: Install System Packages
+  pacman: name={{item}}
+  with_items:
+    - alcritty
+  tags:
+    - install
+    - alcritty
+- name: Install theme
+  clonar repositorio de los thems

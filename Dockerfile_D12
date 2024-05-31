@@ -1,8 +1,0 @@
-FROM debian:bookworm AS base
-RUN apt-get update; \
-    apt-get install -y ansible; \
-    apt-get clean all
-
-WORKDIR /root
-COPY . /root/.chaConfig
-RUN ansible-playbook .chaConfig/local.yml

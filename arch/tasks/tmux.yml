@@ -1,5 +1,5 @@
 - name: Installing Tmux
-  apt: name=tmux
+  pacman: tmux
   tags:
     - install
     - tmux
@@ -8,3 +8,5 @@
   tags:
     - install
     - tmux
+- name: Instalar gitmux
+clonar la wea y correr go install

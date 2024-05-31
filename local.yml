@@ -1,5 +1,5 @@
 - hosts: localhost
-  become_user: "{{ lookup('env', 'USER') }}"
+  # become_user: "{{ lookup('env', 'USER') }}"
   become: true
   # # TODO: ADD VAULT PASSWORD
   # vars_prompt:
@@ -7,16 +7,9 @@
   #     prompt: "Enter Vault Pasword"
   #     private: yes
   vars:
-    ansible_ssh_private_key_file: $HOME/.ssh/id_ed25519.pub
+    ansible_ssh_private_key_file: $HOME/.ssh/id_ed25519
 
   pre_tasks:
-    - name: Update cache
-      apt:
-        update_cache: true
-      tags:
-        - install
-      when: ansible_os_family == "Debian"
-
     - name: Update brew and upgrade all packages
       shell: brew update && brew upgrade && brew upgrade --cask && brew cleanup
       tags:
@@ -24,37 +17,40 @@
       become: false
       when: ansible_os_family == "Darwin"
 
-  tasks:
-    # - block:
-    #   - name: Core Dependencies
-    #     ansible.builtin.import_tasks: tasks/linux/core-setup.yml
-    #
-    #   - name: Zsh Setup
-    #     ansible.builtin.import_tasks: tasks/linux/zsh.yml
-    #
-    #   - name: Dotfiles Setup 
-    #     ansible.builtin.import_tasks: tasks/linux/dotfiles.yml
-    #
-    #   - name: Tmux Setup 
-    #     ansible.builtin.import_tasks: tasks/linux/tmux.yml
-    #
-    #   - name: Neovim Setup
-    #     ansible.builtin.import_tasks: tasks/linux/nvim.yml
-    #   when: ansible_os_family == "Debian"
+    - name: Update system
+      community.general.pacman:
+        update_cache: true
+        upgrade: true
+      tag:
+        - install
+      when: ansible_os_family == "Archlinux"
 
+  tasks:
     - block:
       - name: Core Dependencies
-        ansible.builtin.import_tasks: tasks/iOS/core-setup.yml
-
+        ansible.builtin.import_tasks: arch/tasks/core-setup.yml
+      
       - name: Zsh Setup
-        ansible.builtin.import_tasks: tasks/iOS/zsh.yml
+        ansible.builtin.import_tasks: arch/tasks/zsh.yml 
 
-      - name: Dotfiles Setup 
-        ansible.builtin.import_tasks: tasks/iOS/dotfiles.yml
+      become_user: "{{ lookup('env', 'USER') }}"
+      become: true
+      when: ansible_os_family == "Archlinux"
 
-      - name: Tmux Setup 
-        ansible.builtin.import_tasks: tasks/iOS/tmux.yml
-
-      - name: Neovim Setup
-        ansible.builtin.import_tasks: tasks/iOS/nvim.yml
-      when: ansible_os_family == "Darwin"
+    # - block:
+    #   - name: Core Dependencies
+    #     ansible.builtin.import_tasks: iOS/tasks/gcore-setup.yml
+    #
+    #   - name: Zsh Setup
+    #     ansible.builtin.import_tasks: iOS/tasks/gzsh.yml
+    #
+    #   - name: Dotfiles Setup 
+    #     ansible.builtin.import_tasks: iOS/tasks/gdotfiles.yml
+    #
+    #   - name: Tmux Setup 
+    #     ansible.builtin.import_tasks: iOS/tasks/gtmux.yml
+    #
+    #   - name: Neovim Setup
+    #     ansible.builtin.import_tasks: iOS/tasks/gnvim.yml
+    #   become_user: "{{ lookup('env', 'USER') }}"
+    #   when: ansible_os_family == "Darwin"

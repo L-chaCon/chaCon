@@ -1,22 +1,23 @@
 # chaCon
 Start up for a new computer or enviroment
-
 ## Install Ansible
 Depending on the OS, the installation of Ansible will be different. [Here are the instructions](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html).
-
+### Arch
+```shell
+sudo pacman -S ansible-core
+ansible-galaxy collection install community.general
+```
 ## Clone this reposotory
 Clone this repository in the home directory of the user that will be using the computer.
 ```bash
 git clone git@github.com:Chacon-tu-drema/chaCon.git ~/.chaConfing
 ```
-
 ## MacOS
 Install programs before running the `ansible-playbook` command
 ### Insatall iTerm2
 ```bash
 brew install --cask iterm2
 ```
-
 ### Install Homebrew
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -26,7 +27,13 @@ brew install --cask iterm2
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
-
+### Run the Ansible Playbook
+Go to the `.chaConfing` directory and run the `ansible-playbook` command.
+```bash
+cd ~/.chaConfing
+ansible-playbook --ask-become-pass local.yml
+```
+## Arch
 ### Run the Ansible Playbook
 Go to the `.chaConfing` directory and run the `ansible-playbook` command.
 ```bash
@@ -34,6 +41,16 @@ cd ~/.chaConfing
 ansible-playbook --ask-become-pass local.yml
 ```
 
+
+
+
+
+
+
+
+
+
+<!-- TODO: ESTO ESTA DE MAS
 The following steps are done by the `local.yml` playbook:
 
 #### Update brew
@@ -151,6 +168,7 @@ git clone https://github.com/Chacon-tu-drema/chaCon.nvim $HOME/.config/nvim
 brew install ripgrep fd
 xcode-select --install
 ```
+-->
 
 ## Debian/Ubuntu
 

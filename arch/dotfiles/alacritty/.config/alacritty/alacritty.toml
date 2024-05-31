@@ -1,0 +1,28 @@
+import = [
+    "~/.config/alacritty/themes/themes/carbonfox.toml"
+]
+
+[shell]
+program = "/usr/bin/zsh"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 7.5
+
+[font.bold]
+family = "SpaceMono Nerd Font Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "SpaceMono Nerd Font Mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "SpaceMono Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "SpaceMono Nerd Font Mono"
+style = "Regular"
