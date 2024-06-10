@@ -41,7 +41,11 @@
         - install
         - zsh
   when: not oh_my_zsh_path.stat.exists
-
+- name: Install p10k
+  shell: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+  tags:
+    - install
+    - p10k
 - name: Install Git fzf 
   git:
     repo: 'https://github.com/junegunn/fzf-git.sh.git'
@@ -50,12 +54,3 @@
   tags:
     - install
     - zsh
-
-- name: Create theme folder for bat
-  shell: mkdir -p "$(bat --config-dir)/themes"
-
-- name: Curl fly16 theme
-  shell: cd $(bat --config-dir)/themes && curl -O https://raw.githubusercontent.com/bluz71/fly16-bat/master/fly16.tmTheme
-
-- name: Build fly16 Theme
-  shell: cd $(bat --config-dir)/themes && bat cache --build 
