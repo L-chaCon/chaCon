@@ -4,7 +4,7 @@
     - install
     - dotfiles
 - name: Stow dotfiles
-  shell: cd $HOME/.chaConfig/dotfiles
+  shell: source $HOME/.chaConfing/arch/dotfiles/install
   tags:
     - install
     - dotfiles

@@ -1,9 +1,8 @@
-- name: Install System Packages
-  pacman: name={{item}}
-  with_items:
-    - alcritty
-  tags:
-    - install
-    - alcritty
-- name: Install theme
-  clonar repositorio de los thems
+- name: Install alacritty
+  shell: pacman -S alacritty
+
+- name: Create Alacritty Theme dir
+  shell: mkdir -p ~/.config/alacritty/themes
+
+- name: Clone Alacritty Theme
+  shell: git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes 

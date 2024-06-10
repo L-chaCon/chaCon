@@ -1,22 +1,24 @@
-- name: Install ZSH
-  apt: name=zsh
-  tags:
-Hay que6 agregar
-- fzf
-- fd
-- bat
-    - install
-    - zsh
+- name: Install ZSH Tools
+  pacman: name={{ item }}
+  with_items:
+    - fzf
+    - fd
+    - bat
+    - eza
+    - zoxide
+
 - name: Install Oh My Zsh
   shell: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   tags:
     - install
     - zsh
+
 - name: Install zsh-autosuggestions
   shell: git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
   tags:
     - install
     - zsh
+
 - name: Install zsh-syntax-highlighting
   shell: git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
   tags:
@@ -30,4 +32,4 @@ Hay que6 agregar
 - name: Delete .zshrc
   shell: rm ~/.zshrc
 - name: Install fzf Git
-  aqui tengo que clonar el fzf-git.sh
+  shell: git clone https://github.com/junegunn/fzf-git.sh.git $HOME/.fzf-git.sh

@@ -2,3 +2,4 @@
 LICENSE
 *.md
 Dockerfile_D12
+.tmp*
