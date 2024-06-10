@@ -22,6 +22,11 @@ Hay que6 agregar
   tags:
     - install
     - zsh
+- name: Install p10k
+  shell: yay -S --noconfirm zsh-theme-powerlevel10k-git
+  tags:
+    - p10k
+    - install
 - name: Delete .zshrc
   shell: rm ~/.zshrc
 - name: Install fzf Git

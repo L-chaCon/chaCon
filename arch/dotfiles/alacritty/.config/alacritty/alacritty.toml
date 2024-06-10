@@ -9,7 +9,7 @@ program = "/usr/bin/zsh"
 TERM = "xterm-256color"
 
 [font]
-size = 7.5
+size = 9.5
 
 [font.bold]
 family = "SpaceMono Nerd Font Mono"
