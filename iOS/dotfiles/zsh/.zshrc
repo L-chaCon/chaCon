@@ -6,6 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="robbyrussell"
 CASE_SENSITIVE="true"
 # User configuration
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf)
@@ -24,7 +25,6 @@ export LANG=en_GB.UTF-8
 export PAGER="bat"
 # ALIAS
 alias rm="rm -iv"
-bindkey -s "^ " 'source ~/.local/scripts/tmux-sessionizer\n'
 # ---- FZF -----
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
@@ -63,8 +63,8 @@ _fzf_comprun() {
 export BAT_THEME="Coldark-Dark"
 # ---- Eza (better ls) -----
 alias ls="eza --color=always --long --git --no-user --icons=always"
-# ---- Zoxide (better cd) ----
-eval "$(zoxide init zsh)"
-alias cd="z"
+# ---- Tmux Sessionizer (based on ThePrimagen)
+export FZF_SEARCH_FOLDERS="$HOME/Desktop/Kun/Personal:$HOME/Desktop/Kun/3.artlogic"
+bindkey -s "^ " 'source ~/.local/scripts/tmux-sessionizer\n'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

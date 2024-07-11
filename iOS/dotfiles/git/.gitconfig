@@ -1,6 +1,6 @@
 [user]
-	name = chaCon
-	email = octavio.montt@gmail.com 
+    name = chaCon
+    email = octavio.montt@gmail.com 
 [core]
     pager = delta
 
@@ -20,3 +20,5 @@
 
 [diff]
     colorMoved = default
+[init]
+    defaultBranch = main
