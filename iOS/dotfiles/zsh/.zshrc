@@ -1,12 +1,5 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-# ZSH_THEME="robbyrussell"
+ZSH_THEME=""
 CASE_SENSITIVE="true"
 # User configuration
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf)
@@ -64,7 +57,7 @@ export BAT_THEME="Coldark-Dark"
 # ---- Eza (better ls) -----
 alias ls="eza --color=always --long --git --no-user --icons=always"
 # ---- Tmux Sessionizer (based on ThePrimagen)
-export FZF_SEARCH_FOLDERS="$HOME/Desktop/Kun/Personal:$HOME/Desktop/Kun/3.artlogic"
+export FZF_SEARCH_FOLDERS="$HOME/Desktop/Kun/Personal:$HOME/Desktop/Kun/3.artlogic:$HOME"
 bindkey -s "^ " 'source ~/.local/scripts/tmux-sessionizer\n'
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Star Ship
+eval "$(starship init zsh)"
