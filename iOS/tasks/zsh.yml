@@ -8,10 +8,11 @@
     - fd
     - bat
     - git-delta
-    - eza
+    - lsd
     - tldr
     - zoxide
     - starship 
+    - viu
   tags:
     - install
     - zsh

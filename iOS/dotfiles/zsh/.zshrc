@@ -4,6 +4,7 @@ CASE_SENSITIVE="true"
 # User configuration
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf)
 source $ZSH/oh-my-zsh.sh
+set -o vi
 # MAN & HELP
 export MANPATH="/usr/local/man:$MANPATH"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -16,8 +17,11 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 # USER
 export LANG=en_GB.UTF-8
 export PAGER="bat"
+# GO Path
+export PATH="/Users/artlogic/go/bin:$PATH"
 # ALIAS
 alias rm="rm -iv"
+alias sve="source .venv/bin/activate"
 # ---- FZF -----
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
@@ -46,7 +50,7 @@ _fzf_comprun() {
   local command=$1
   shift
   case "$command" in
-    cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
+    cd)           fzf --preview 'lsd --tree {} | head -200' "$@" ;;
     export|unset) fzf --preview "eval 'echo $'{}"         "$@" ;;
     ssh)          fzf --preview 'dig {}'                   "$@" ;;
     *)            fzf --preview "bat -n --color=always --line-range :500 {}" "$@" ;;
@@ -54,8 +58,12 @@ _fzf_comprun() {
 }
 # ----- Bat (better cat) -----
 export BAT_THEME="Coldark-Dark"
-# ---- Eza (better ls) -----
-alias ls="eza --color=always --long --git --no-user --icons=always"
+# ---- LSD (better ls) -----
+alias ls="lsd"
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
 # ---- Tmux Sessionizer (based on ThePrimagen)
 export FZF_SEARCH_FOLDERS="$HOME/Desktop/Kun/Personal:$HOME/Desktop/Kun/3.artlogic:$HOME"
 bindkey -s "^ " 'source ~/.local/scripts/tmux-sessionizer\n'
