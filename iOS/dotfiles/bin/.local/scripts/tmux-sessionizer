@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-DEFAULT_FOLDERS="$HOME/work:$HOME/projects:$HOME/personal:$HOME/.config"
+DEFAULT_FOLDERS="$HOME/work:$HOME/projects:$HOME/personal:$HOME/.config $HOME/workspace $HOME/workspace/github.com/chaCon"
 if [[ -n $FZF_SEARCH_FOLDERS ]]; then
     FOLDERS="$DEFAULT_FOLDERS:$FZF_SEARCH_FOLDERS"
 else
