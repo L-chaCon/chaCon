@@ -28,7 +28,7 @@ Start up for a new computer or enviroment
 #### Clone this reposotory
 Clone this repository in the home directory of the user that will be using the computer.
 ```bash
-git clone git@github.com:Chacon-tu-drema/chaCon.git ~/.chaConfing
+git clone git@github.com:Chacon-tu-drema/chaCon.git ~/.chaConfig
 ```
 #### Install Ansible
 Depending on the OS, the installation of Ansible will be different. [Here are the instructions](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html).
