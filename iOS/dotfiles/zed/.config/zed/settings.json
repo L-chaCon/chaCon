@@ -12,7 +12,7 @@
     "theme": "Carbonfox",
     "vim_mode": true,
     "ui_font_size": 14,
-    "buffer_font_size": 14,
+    "buffer_font_size": 12,
     "tab_size": 4,
     "buffer_font_family": "SpaceMono Nerd Font",
     "tab_bar": {

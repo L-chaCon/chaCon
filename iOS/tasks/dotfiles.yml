@@ -3,13 +3,14 @@
   tags:
     - install
     - dotfiles
-- name: Coping dotfiles folder
-  shell: rsync -rva --ignore-existing --relative ~/.chaConfig/dotfiles/ $HOME/.dotfiles
+# FIX: HACER QUE FUNCIONE LO DE DAWRIN
+- name: Delete .zshrc
+  shell: rm $HOME/.zshrc
   tags:
     - install
     - dotfiles
 - name: Stow dotfiles
-  shell: cd $HOME/.dotfiles && rm $HOME/.zshrc && ./install
+  shell: $HOME/.chaConfing/iOS/dotfiles/install
   tags:
     - install
     - dotfiles

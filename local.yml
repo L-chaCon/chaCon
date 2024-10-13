@@ -2,8 +2,7 @@
   become: true
   vars:
     ansible_ssh_private_key_file: $HOME/.ssh/id_ed25519
-
-  # TODO: GET THE VARIABLE $HOME
+  # FIX: ansible_os_family
   pre_tasks:
     - name: Update brew and upgrade all packages
       shell: brew update && brew upgrade && brew upgrade --cask && brew cleanup
@@ -11,7 +10,6 @@
         - install
       become: false
       when: ansible_os_family == "Darwin"
-
     - name: Update system
       community.general.pacman:
         update_cache: true
@@ -19,45 +17,33 @@
       tag:
         - install
       when: ansible_os_family == "Archlinux"
-
   tasks:
     - block:
-      - name: Core Dependencies
-        ansible.builtin.import_tasks: arch/tasks/core-setup.yml
-      
-      - name: Zsh Setup
-        ansible.builtin.import_tasks: arch/tasks/zsh.yml 
-
-      - name: Alacritty Setup
-        ansible.builtin.import_tasks: arch/tasks/alacritty.yml 
-
-      - name: i3 Setup
-        ansible.builtin.import_tasks: arch/tasks/i3.yml
-
-      - name: Tmux Setup 
-        ansible.builtin.import_tasks: arch/tasks/gtmux.yml
-
-      - name: Dotfiles Setup 
-        ansible.builtin.import_tasks: arch/tasks/gdotfiles.yml
-
-      - name: Neovim Setup
-        ansible.builtin.import_tasks: arch/tasks/gnvim.yml
+        - name: Core Dependencies
+          ansible.builtin.import_tasks: arch/tasks/core-setup.yml
+        - name: Zsh Setup
+          ansible.builtin.import_tasks: arch/tasks/zsh.yml
+        - name: Alacritty Setup
+          ansible.builtin.import_tasks: arch/tasks/alacritty.yml
+        - name: i3 Setup
+          ansible.builtin.import_tasks: arch/tasks/i3.yml
+        - name: Tmux Setup
+          ansible.builtin.import_tasks: arch/tasks/tmux.yml
+        - name: Dotfiles Setup
+          ansible.builtin.import_tasks: arch/tasks/dotfiles.yml
+        - name: Neovim Setup
+          ansible.builtin.import_tasks: arch/tasks/nvim.yml
       when: ansible_os_family == "Archlinux"
-
     - block:
-      - name: Core Dependencies
-        ansible.builtin.import_tasks: iOS/tasks/gcore-setup.yml
-
-      - name: Zsh Setup
-        ansible.builtin.import_tasks: iOS/tasks/gzsh.yml
-
-      - name: Dotfiles Setup 
-        ansible.builtin.import_tasks: iOS/tasks/gdotfiles.yml
-
-      - name: Tmux Setup 
-        ansible.builtin.import_tasks: iOS/tasks/gtmux.yml
-
-      - name: Neovim Setup
-        ansible.builtin.import_tasks: iOS/tasks/gnvim.yml
+        - name: Core Dependencies
+          ansible.builtin.import_tasks: iOS/tasks/core-setup.yml
+        - name: Zsh Setup
+          ansible.builtin.import_tasks: iOS/tasks/zsh.yml
+        - name: Dotfiles Setup
+          ansible.builtin.import_tasks: iOS/tasks/dotfiles.yml
+        - name: Tmux Setup
+          ansible.builtin.import_tasks: iOS/tasks/tmux.yml
+        - name: Neovim Setup
+          ansible.builtin.import_tasks: iOS/tasks/nvim.yml
       become_user: "{{ lookup('env', 'USER') }}"
       when: ansible_os_family == "Darwin"

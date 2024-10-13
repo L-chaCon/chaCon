@@ -1,5 +1,5 @@
 - name: Install System Packages
-  homebrew: 
+  homebrew:
     name: "{{ item }}"
     state: present
   with_items:
@@ -7,11 +7,12 @@
     - curl
     - vim
     - tree
+    - ssh
+    - sshs
   tags:
     - install
     - core
-
 - name: Create personal folder
-  shell: mkdir -p $HOME/work && mkdir -p $HOME/projects && mkdir -p $HOME/personal
+  shell: mkdir -p $HOME/workspace/work $HOME/workspace/personal $HOME/workspace/github.com/chaCon $HOME/workspace/projects
   tags:
     - personal

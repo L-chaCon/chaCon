@@ -1,5 +1,5 @@
 - name: Install ZSH and Dependencies
-  homebrew: 
+  homebrew:
     name: "{{ item }}"
     state: present
   with_items:
@@ -10,8 +10,7 @@
     - git-delta
     - lsd
     - tldr
-    - zoxide
-    - starship 
+    - starship
     - viu
   tags:
     - install
@@ -27,16 +26,16 @@
         - install
         - zsh
     - name: Install Autosuggestions
-      git: 
-        repo: https://github.com/zsh-users/zsh-autosuggestions 
+      git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions
         dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
         force: true
       tags:
         - install
         - zsh
     - name: Install Syntax Highlighting
-      git: 
-        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git 
+      git:
+        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
         dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
         force: true
       tags:
@@ -48,7 +47,7 @@
   tags:
     - install
     - p10k
-- name: Install Git fzf 
+- name: Install Git fzf
   git:
     repo: 'https://github.com/junegunn/fzf-git.sh.git'
     dest: "{{ lookup('env','HOME') }}/.fzf-git.sh"
