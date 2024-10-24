@@ -3,14 +3,18 @@
   tags:
     - install
     - dotfiles
-# FIX: HACER QUE FUNCIONE LO DE DAWRIN
+- name: Check If .zshrc Exist
+  stat:
+    path: "{{ lookup('env', 'HOME') }}/.zshrc"
+  register: zshrc_path
 - name: Delete .zshrc
   shell: rm $HOME/.zshrc
   tags:
     - install
     - dotfiles
+  when: zshrc_path.stat.exists
 - name: Stow dotfiles
-  shell: $HOME/.chaConfing/iOS/dotfiles/install
+  shell: $HOME/.chaConfig/iOS/dotfiles/install
   tags:
     - install
     - dotfiles

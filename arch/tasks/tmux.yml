@@ -1,8 +1,6 @@
-- name: Installing Tmux
-  pacman: tmux
-
-- name: Plugging Tmux TPM
-  shell: mkdir $HOME/.tmux && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-- name: Instalar gitmux
-  shell: yay -S gitmux
+# - name: Installing Tmux
+#   pacman: tmux
+# - name: Plugging Tmux TPM
+#   shell: mkdir $HOME/.tmux && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# - name: Instalar gitmux
+#   shell: yay -S gitmux

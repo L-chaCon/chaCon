@@ -42,11 +42,6 @@
         - install
         - zsh
   when: not oh_my_zsh_path.stat.exists
-- name: Install p10k
-  shell: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-  tags:
-    - install
-    - p10k
 - name: Install Git fzf
   git:
     repo: 'https://github.com/junegunn/fzf-git.sh.git'

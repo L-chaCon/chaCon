@@ -7,7 +7,6 @@
     - curl
     - vim
     - tree
-    - ssh
     - sshs
   tags:
     - install
@@ -16,3 +15,17 @@
   shell: mkdir -p $HOME/workspace/work $HOME/workspace/personal $HOME/workspace/github.com/chaCon $HOME/workspace/projects
   tags:
     - personal
+
+# FIX:: 
+# Tengo que agregar mis git personales:
+#   - Documentos: https://github.com/L-chaCon/Documents
+#   - Imagenes: https://github.com/L-chaCon/images
+#   - Notes: https://github.com/L-chaCon/notes
+# This is the structure that I have to workspace, lets do that in the create personal folder 
+# └── workspace
+#     ├── github.com
+#     ├── notes
+#     ├── personal
+#     ├── projects
+#     ├── work
+#     └── zig
