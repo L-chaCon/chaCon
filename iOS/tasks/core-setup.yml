@@ -15,6 +15,25 @@
   shell: mkdir -p $HOME/workspace/work $HOME/workspace/personal $HOME/workspace/github.com/chaCon $HOME/workspace/projects
   tags:
     - personal
+- name: Clone notes
+  shell: git clone https://github.com/Chacon-tu-drema/notes $HOME/workspace/notes
+  tags:
+    - personal
+    - notes
+- name: Clone Documents
+  shell: git clone https://github.com/Chacon-tu-drema/Documents $HOME/Documents/personal
+  tags:
+    - personal
+    - documents
+- name: Clone Images
+  shell: git clone https://github.com/Chacon-tu-drema/images $HOME/Pictures/personal
+  tags:
+    - personal
+    - images
+- name: Install WezTerm
+  shell: brew --cascade wezterm
+  tags:
+    - terminal
 
 # FIX:: 
 # Tengo que agregar mis git personales:
@@ -27,5 +46,4 @@
 #     ├── notes
 #     ├── personal
 #     ├── projects
-#     ├── work
-#     └── zig
+#     └── work
