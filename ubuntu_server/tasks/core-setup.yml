@@ -1,0 +1,45 @@
+- name: Install System Packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - git
+    - curl
+    - vim
+    - tree
+    - sshs
+  tags:
+    - install
+    - core
+- name: Create personal folder
+  shell: mkdir -p $HOME/workspace/work $HOME/workspace/personal $HOME/workspace/github.com/chaCon $HOME/workspace/projects
+  tags:
+    - personal
+- name: Clone notes
+  shell: git clone https://github.com/Chacon-tu-drema/notes $HOME/workspace/notes
+  tags:
+    - personal
+    - notes
+- name: Clone Documents
+  shell: git clone https://github.com/Chacon-tu-drema/Documents $HOME/Documents
+  tags:
+    - personal
+    - documents
+- name: Clone Images
+  shell: git clone https://github.com/Chacon-tu-drema/images $HOME/Pictures/personal
+  tags:
+    - personal
+    - images
+
+# FIX:: 
+# Tengo que agregar mis git personales:
+#   - Documentos: https://github.com/L-chaCon/Documents
+#   - Imagenes: https://github.com/L-chaCon/images
+#   - Notes: https://github.com/L-chaCon/notes
+# This is the structure that I have to workspace, lets do that in the create personal folder 
+# └── workspace
+#     ├── github.com
+#     ├── notes
+#     ├── personal
+#     ├── projects
+#     └── work

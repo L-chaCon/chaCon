@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+if [[ -z $STOW_FOLDERS ]]; then
+    STOW_FOLDERS="tmux,bin,zsh,git,starship"
+fi
+
+if [[ -z $DOTFILES ]]; then
+    DOTFILES=$HOME/.chaConfig/ubuntu_server/dotfiles/
+fi
+
+cd $DOTFILES
+for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
+do
+    echo "stow $folder -t $HOME"
+    stow -D $folder -t $HOME
+    stow $folder -t $HOME
+done
+# FIX: Esto lo tengo que hacer solo uno con el unnstall, o separarlos mejor. tambien solo dejarlo en un lugar y que use {{}} como iOS

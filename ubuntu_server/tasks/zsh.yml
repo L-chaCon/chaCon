@@ -1,0 +1,61 @@
+- name: Install ZSH and Dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - zsh
+    - bat
+    - git-delta
+    - lsd
+    - tldr
+    - starship
+    - viu
+  tags:
+    - install
+    - zsh
+- name: Check If Oh My Zsh Exist
+  stat:
+    path: "{{ lookup('env', 'HOME') }}/.oh-my-zsh"
+  register: oh_my_zsh_path
+- block:
+    - name: Install Oh My Zsh
+      shell: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      tags:
+        - install
+        - zsh
+    - name: Install Autosuggestions
+      git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions
+        dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+        force: true
+      tags:
+        - install
+        - zsh
+    - name: Install Syntax Highlighting
+      git:
+        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+        dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+        force: true
+      tags:
+        - install
+        - zsh
+  when: not oh_my_zsh_path.stat.exists
+- name: Install Git fzf
+  git:
+    repo: 'https://github.com/junegunn/fzf-git.sh.git'
+    dest: "{{ lookup('env','HOME') }}/.fzf-git.sh"
+    force: true
+  tags:
+    - install
+    - zsh
+
+# FIX: ALGUNOS DE LOS CAMBIOS QUE HAY QUE HACER PARA QUE FUNCIONE:
+# - fzf: 
+#     Instllar ~/.fzf desde git y correr el script, cuando lo hago por manager me queda la caga
+#     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+#     ~/.fzf/install
+#     
+#     Son literalmente dos lineas
+# - fd: 
+#     sudo apt install fd-find
+#     sudo ln -s $(which fdfind) ~/.local/bin/fd
