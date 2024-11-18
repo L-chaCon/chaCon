@@ -67,7 +67,7 @@ alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
 # ---- Tmux Sessionizer (based on ThePrimagen)
-export FZF_SEARCH_FOLDERS="$HOME/Desktop/Kun/Personal:$HOME/Desktop/Kun/3.artlogic:$HOME"
+export FZF_SEARCH_FOLDERS="$HOME/workspace/work:$HOME/workspace/projects:$HOME/workspace/personal"
 bindkey -s "^ " 'source ~/.local/scripts/tmux-sessionizer\n'
 # Star Ship
 eval "$(starship init zsh)"
