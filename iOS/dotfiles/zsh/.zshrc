@@ -71,3 +71,7 @@ bindkey -s "^ " 'source ~/.local/scripts/tmux-sessionizer\n'
 eval "$(zoxide init zsh --cmd cd)"
 # Star Ship
 eval "$(starship init zsh)"
+
+# Generated for envman. Do not edit. Esto se instalo con github, es para 
+# instalar programs desde scripts
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
