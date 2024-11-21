@@ -17,6 +17,7 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 # USER
 export LANG=en_GB.UTF-8
 export PAGER="bat"
+export EDITOR="nvim"
 # GO Path
 export PATH="/Users/artlogic/go/bin:$PATH"
 # ALIAS
@@ -69,6 +70,15 @@ export FZF_SEARCH_FOLDERS="$HOME/Desktop/Kun/Personal:$HOME/Desktop/Kun/3.artlog
 bindkey -s "^ " 'source ~/.local/scripts/tmux-sessionizer\n'
 # Zoxide 
 eval "$(zoxide init zsh --cmd cd)"
+# Yazi
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 # Star Ship
 eval "$(starship init zsh)"
 

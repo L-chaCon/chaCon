@@ -7,24 +7,24 @@ local config = wezterm.config_builder()
 config.color_scheme = "carbonfox"
 config.colors = {
 	ansi = {
-		"#282828",
-		"#ff3399",
-		"#25be6a",
-		"#08bdba",
-		"#78a9ff",
-		"#be95ff",
-		"#00e6e6",
-		"#f2f2f2",
+		"#000000", -- black
+		"#ff3399", -- red
+		"#25be6a", -- green
+		"#07faf2", -- yellow
+		"#80a9ff", -- blue
+		"#be95ff", -- magenta
+		"#06dbf2", -- cyan
+		"#f2f2f2", -- grey
 	},
 	brights = {
-		"#484848",
-		"#f16da6",
-		"#46c880",
-		"#2dc7c4",
-		"#8cb6ff",
-		"#c8a5ff",
-		"#00ffff",
-		"#ffffff",
+		"#282828", -- darkgray
+		"#f16da6", -- lightred
+		"#46c880", -- lightgreen
+		"#2dc7c4", -- lightyellow
+		"#8cb6ff", -- lightblue
+		"#c8a5ff", -- lightmagenta
+		"#00ffff", -- lightcyan
+		"#ffffff", -- white
 	},
 	background = "#000000",
 	foreground = "#ffffff", -- este es el texto en la terminal
