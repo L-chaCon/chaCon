@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# NOTE: iOS
+if [[ $1 = "iOS" ]]; then
+    echo "Checking Yazi"
+    if ! command -v yazi &>/dev/null; then
+        echo "- Yazi is not installed. Installing Yazy..."
+        brew install ffmpeg sevenzip jq poppler fd ripgrep fzf zoxide imagemagick font-symbols-only-nerd-font
+        brew install yazi --HEAD
+    else
+        echo "- Yazy is already installed."
+    fi
+
+# NOTE: Ubuntu
+elif [[ $1 == "ubuntu" ]]; then
+    echo "ubuntu"
+# NOTE: Debian
+elif [[ $1 == "debian" ]]; then
+    echo "debian"
+fi
+

@@ -10,7 +10,7 @@ if [[ $1 = "iOS" ]]; then
     fi
     
     echo "Installing command line tools"
-    # brew install fzf fd bat git-delta lsd starship
+    brew install fzf fd bat git-delta lsd starship
 
     echo "Checking Oh My Zsh"
     if [[ ! -d "$HOME/.oh-my-zsh" ]]; then

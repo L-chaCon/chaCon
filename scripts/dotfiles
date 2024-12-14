@@ -13,7 +13,7 @@ if [[ $1 = "iOS" ]]; then
 
     current_folder=$(pwd)
     rm -rf $HOME/.zshrc
-    
+
     echo "Creating links to dotfiles"
     cd dotfiles
     for item in "${STOW_FOLDERS[@]}"; do
@@ -21,13 +21,7 @@ if [[ $1 = "iOS" ]]; then
         stow -D $item -t $HOME
         stow $item -t $HOME
     done
-
     cd $current_folder
-
-
-
-
-
 
 
 # NOTE: Ubuntu

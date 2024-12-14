@@ -41,16 +41,15 @@ execute() {
     "$@"
 }
 
-log "*------------------- POW! -------------------*"
+log "*-*   *-*   *POW!*   *-*   *-*"
 actions=("BANG!" "ZAP!" "CRASH!" "POOF!" "BAM!")
 length=${#actions[@]}
 
 count=0
 for script in $scripts; do
-    if ls $script | grep 'dotfiles';then
-        log "     * ${actions[$((count % length))]} *"
-        log "running script: $script"
-        execute ./$script $os
-        ((count++))
-    fi
+    log "   *   ${actions[$((count % length))]}   *   "
+    log "running script: $script"
+    execute ./$script $os
+    ((count++))
+    log " ---   ---   ---   ---   ---   ---"
 done

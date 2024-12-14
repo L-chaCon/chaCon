@@ -3,18 +3,16 @@
 echo "Creating base folders"
 mkdir -p $HOME/workspace/work $HOME/workspace/personal $HOME/workspace/github.com/chaCon $HOME/workspace/projects
 
-# TODO: AGREGAR CLONAR REPOSITORIOS DE CARPETAS `notes`, `documents`, `imagenes`
-
 echo "Cheking for ssh key"
 if ls $HOME/.ssh | grep -q "chacon"; then
     echo "- SSH key found at: $HOME/.ssh/chacon"
     echo "- Add the key to GitHub. Have you done it? (y/n)"
-    # read answer
+    read answer
 else
     echo "- Creating SSH key ED25519"
     ssh-keygen -t ed25519 -C "montt.octavio@gmail.com" -f $HOME/.ssh/chacon -N ""
     echo "- Add the key to GitHub. Have you done it? (y/n)"
-    # read answer
+    read answer
 fi
 
 # TODO: PROPAGETE THE EXIT
@@ -23,9 +21,16 @@ fi
 #     exit 1
 # fi
 
-# git clone git@github.com:L-chaCon/notes.git $HOME/workspace/notes
-# git clone git@github.com:L-chaCon/Documents.git $HOME/Documents/personal
-# git clone git@github.com:L-chaCon/Images.git $HOME/Pictures/personal
+echo "Cheking for git folders"
+if [[ ! -d "$HOME/workspace/notes" ]];then
+    git clone git@github.com:L-chaCon/notes.git $HOME/workspace/notes
+fi
+if [[ ! -d "$HOME/Documents/personal" ]];then
+    git clone git@github.com:L-chaCon/Documents.git $HOME/Documents/personal
+fi
+if [[ ! -d "$HOME/Pictures/personal" ]];then
+    git clone git@github.com:L-chaCon/Images.git $HOME/Pictures/personal
+fi
 
 # NOTE: iOS
 if [[ $1 = "iOS" ]]; then
@@ -37,18 +42,18 @@ if [[ $1 = "iOS" ]]; then
     else
         echo "- Homebrew is already installed."
     fi
-    # brew update && brew upgrade && brew cleanup
-    # brew install tree sshs tldr ripgrep
+    brew update && brew upgrade && brew cleanup
+    brew install tree sshs tldr ripgrep
     
     # TODO: HACER UN SCRIPT PARA USAR `tldr` funciona tldr -C (lo que busco) | bat
 
     echo "Checking wezterm"
     if ! command -v wezterm &>/dev/null; then
         echo "- WezTerm is not installed. Installing WezTerm..."
-        # brew install --cask wezterm@nightly
+        brew install --cask wezterm@nightly
     else
         echo "- WezTerm is already installed."
-        # brew upgrade --cask wezterm@nightly --no-quarantine --greedy-latest
+        brew upgrade --cask wezterm@nightly --no-quarantine --greedy-latest
     fi
 
 # NOTE: Ubuntu
