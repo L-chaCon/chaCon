@@ -44,6 +44,15 @@ if [[ $1 = "iOS" ]]; then
     fi
     brew update && brew upgrade && brew cleanup
     brew install tree sshs tldr ripgrep
+
+    echo "Checking for JetBrains font"
+    if ls $HOME/Library/Fonts | grep -q JetBrainsMonoNLNerdFont; then
+        echo "- Installing JetBrais Nerd Font..."
+        brew install --cask font-jetbrains-mono-nerd-font
+    else
+        echo "- JetBrais Nerd Font already installed."
+    fi
+
     
     # TODO: HACER UN SCRIPT PARA USAR `tldr` funciona tldr -C (lo que busco) | bat
 
