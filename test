@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if ls $HOME/Library/Fonts | grep -q JetBrainsMonoNLNerdFont; then
-    echo "The file or directory exists!"
-else
-    echo "The file or directory does not exist."
-fi
