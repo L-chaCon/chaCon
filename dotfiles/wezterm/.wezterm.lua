@@ -73,7 +73,7 @@ config.inactive_pane_hsb = {
 }
 
 -- Font
-config.font_size = 13.0
+config.font_size = 15.0
 config.line_height = 1.2
 config.font = wezterm.font("JetBrains Mono")
 

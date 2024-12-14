@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# NOTE: iOS
+if [[ $1 = "iOS" ]]; then
+    echo "Cheking NeoVim"
+    if [[ ! -d $HOME/.local/neovim ]]; then
+        echo "- Neovim is not installed. Installing Neovim..."
+        current_path=$(pwd)
+        git clone git@github.com:neovim/neovim.git $HOME/.local/neovim
+        cd $HOME/.local/neovim
+        git fetch
+        xcode-select --install
+        brew install ninja cmake gettext curl luajit
+        rm -r build/
+        make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local/nvim"
+        make install
+        sudo 
+        sudo ln -s $HOME/.local/nvim/bin/nvim /usr/local/bin/nvim
+        cd $current_path
+    else
+        echo "- Neovim is already installed."
+    fi
+
+    echo "Checking Nvim Configuration"
+    if [[ ! -d $HOME/.config/nvim ]];then
+        echo "- Config is not installed. Installing Config..."
+        mkdir -p $HOME/.config
+        git clone git@github.com:L-chaCon/chaCon.nvim.git $HOME/.config/nvim
+    else
+        echo "- Config is already installed."
+    fi
+
+
+# NOTE: Ubuntu
+elif [[ $1 == "ubuntu" ]]; then
+    echo "ubuntu"
+# NOTE: Debian
+elif [[ $1 == "debian" ]]; then
+    echo "debian"
+fi
+

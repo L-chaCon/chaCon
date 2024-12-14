@@ -3,6 +3,9 @@
   tags:
     - install
     - nvim
+
+# FIX: AGREGAR LAS COSAS QUE SE NECESITAN, ENTRE ELLAS
+#  - brew install luajit
 - name: Nvim Config
   shell: |
     mkdir -p $HOME/.config
@@ -14,3 +17,4 @@
   shell: |
     xcode-select --install
     brew install ripgrep fd
+    brew install luajit
