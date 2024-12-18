@@ -1,0 +1,9 @@
+#!/bin/bash
+
+STOW_FOLDERS=("tmux" "bin" "bat" "zsh" "git" "starship" "wezterm" "yazi")
+
+for item in "${STOW_FOLDERS[@]}"; do
+    echo "- stow $item -t $HOME"
+    stow -D $item -t $HOME
+    stow $item -t $HOME
+done

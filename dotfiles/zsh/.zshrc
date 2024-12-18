@@ -16,7 +16,7 @@ help() {
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 # USER
 export LANG=en_GB.UTF-8
-export PAGER="bat"
+export PAGER="less"
 export EDITOR="nvim"
 # GO Path
 export PATH="/Users/artlogic/go/bin:$PATH"
@@ -41,9 +41,19 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 bindkey -r "^G"
+# FZF GIT
 source ~/.fzf-git.sh/fzf-git.sh
+# Redefine this function to change the options
+_fzf_git_fzf() {
+  fzf --height=50% --tmux 90%,70% \
+    --layout=reverse --multi --min-height=20 --border \
+    --border-label-pos=2 \
+    --color='bg:#000000,bg+:#0e0e0e,fg:#f2f4f8,header:#3DDBD9:italic:underline,info:#25be6a,query:#f2f4f8' \
+    --preview-window='right,50%,border-left' \
+    --bind='ctrl-/:change-preview-window(down,50%,border-top|hidden|)' "$@"
+}
 export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
-export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+alias fzf='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
 # Advanced customization of fzf options via _fzf_comprun function
 # - The first argument to the function is the name of the command.
 # - You should make sure to pass the rest of the arguments to fzf.
@@ -58,7 +68,7 @@ _fzf_comprun() {
   esac
 }
 # ----- Bat (better cat) -----
-export BAT_THEME="Coldark-Dark"
+alias cat='bat'
 # ---- LSD (better ls) -----
 alias ls="lsd"
 alias l='ls -l'

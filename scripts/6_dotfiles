@@ -1,7 +1,5 @@
 #!/bin/bash
 
-STOW_FOLDERS=("tmux" "bin" "zsh" "git" "starship" "wezterm" "yazi")
-
 # NOTE: iOS
 if [[ $1 = "iOS" ]]; then
     if ! command -v stow &>/dev/null;then
@@ -16,6 +14,7 @@ if [[ $1 = "iOS" ]]; then
 
     echo "Creating links to dotfiles"
     cd dotfiles
+    ./install
     for item in "${STOW_FOLDERS[@]}"; do
         echo "- stow $item -t $HOME"
         stow -D $item -t $HOME
