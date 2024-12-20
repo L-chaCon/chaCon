@@ -71,6 +71,21 @@ if [[ $1 = "iOS" ]]; then
         brew upgrade --cask wezterm@nightly --no-quarantine --greedy-latest
     fi
 
+    echo "Cheking htop"
+    if ! command -v htop &>/dev/null; then
+        echo "- Htop is not installed. Installing Htop"
+        brew install ncurses automake autoconf gcc
+        current_folder = $(pwd)
+        git clone git@github.com:KoffeinFlummi/htop-vim.git $HOME/.local/htop
+        cd $HOME/.local/htop
+        ./autogen.sh 
+        ./configure --prefix=$HOME/.local/htop
+        make install
+        cd $current_folder
+    else
+        echo "- Htop is already installed."
+    fi
+
 # NOTE: Ubuntu
 elif [[ $1 == "ubuntu" ]]; then
     echo "ubuntu"
