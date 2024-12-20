@@ -28,18 +28,22 @@ fi
 if [[ ! -d "$HOME/Documents/personal" ]];then
     git clone git@github.com:L-chaCon/Documents.git $HOME/Documents/personal
 fi
-# if [[ ! -d "$HOME/Pictures/personal" ]];then
-#     git clone git@github.com:L-chaCon/Images.git $HOME/Pictures/personal
-# fi
+if [[ ! -d "$HOME/Pictures/personal" ]];then
+    git clone git@github.com:L-chaCon/Images.git $HOME/Pictures/personal
+fi
 
 # NOTE: iOS
 if [[ $1 = "iOS" ]]; then
     echo "Checking Homebrew"
+    # BUG: HAY algunos problemas con que no reconoce brew en los siguentes
+    # Por mientras mejor instalarlo primero asegurase que funciona y despues
+    # correr
     if ! command -v brew &>/dev/null; then
         echo "- Homebrew is not installed. Installing Homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         export PATH=/usr/local/bin:$PATH >> $HOME/.zprofile
         eval "$(/opt/homebrew/bin/brew shellenv)" >> $HOME/.zprofile
+        eval "$(/opt/homebrew/bin/brew shellenv)"
         source $HOME/.zprofile
     else
         echo "- Homebrew is already installed."

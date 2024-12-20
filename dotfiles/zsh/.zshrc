@@ -5,6 +5,8 @@ CASE_SENSITIVE="true"
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf)
 source $ZSH/oh-my-zsh.sh
 set -o vi
+# Nvim Path
+export PATH="$PATH:$HOME/.local/neovim/bin"
 # MAN & HELP
 export MANPATH="/usr/local/man:$MANPATH"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -19,7 +21,7 @@ export LANG=en_GB.UTF-8
 export PAGER="less"
 export EDITOR="nvim"
 # GO Path
-export PATH="/Users/artlogic/go/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 # ALIAS
 alias rm="rm -iv"
 alias sve="source .venv/bin/activate"
@@ -76,7 +78,7 @@ alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
 # ---- Tmux Sessionizer (based on ThePrimagen)
-export FZF_SEARCH_FOLDERS="$HOME/Desktop/Kun/Personal:$HOME/Desktop/Kun/3.artlogic:$HOME"
+export FZF_SEARCH_FOLDERS=""
 bindkey -s "^ " 'source ~/.local/scripts/tmux-sessionizer\n'
 # Zoxide 
 eval "$(zoxide init zsh --cmd cd)"

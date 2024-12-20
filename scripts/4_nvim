@@ -10,7 +10,7 @@ if [[ $1 = "iOS" ]]; then
         cd $HOME/.local/neovim_git
         git fetch
         xcode-select --install
-        brew install ninja cmake gettext curl luajit
+        brew install ninja cmake gettext curl luajit pyright
         rm -r build/
         make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local/neovim"
         make install
