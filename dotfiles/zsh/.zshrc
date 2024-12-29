@@ -7,6 +7,8 @@ source $ZSH/oh-my-zsh.sh
 set -o vi
 # Nvim Path
 export PATH="$PATH:$HOME/.local/neovim/bin"
+# Zig Path
+export PATH="$PATH:$HOME/.local/.zig/zig-macos-aarch64-0.13.0/"
 # MAN & HELP
 export MANPATH="/usr/local/man:$MANPATH"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"

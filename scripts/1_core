@@ -62,13 +62,12 @@ if [[ $1 = "iOS" ]]; then
     
     # TODO: HACER UN SCRIPT PARA USAR `tldr` funciona tldr -C (lo que busco) | bat
 
-    echo "Checking wezterm"
-    if ! command -v wezterm &>/dev/null; then
-        echo "- WezTerm is not installed. Installing WezTerm..."
-        brew install --cask wezterm@nightly
+    echo "Checking Ghostty"
+    if ! command -v ghostty &>/dev/null; then
+        echo "- Ghostty is not installed. Installing Ghostty..."
+        brew install --cask ghostty
     else
-        echo "- WezTerm is already installed."
-        brew upgrade --cask wezterm@nightly --no-quarantine --greedy-latest
+        echo "- Ghostty is already installed."
     fi
 
     echo "Cheking htop"
