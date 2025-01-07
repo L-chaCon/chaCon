@@ -80,7 +80,7 @@ alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
 # ---- Tmux Sessionizer (based on ThePrimagen)
-export FZF_SEARCH_FOLDERS=""
+export FZF_SEARCH_FOLDERS="$HOME/workspace/github.com"
 bindkey -s "^ " 'source ~/.local/scripts/tmux-sessionizer\n'
 # Zoxide 
 eval "$(zoxide init zsh --cmd cd)"
