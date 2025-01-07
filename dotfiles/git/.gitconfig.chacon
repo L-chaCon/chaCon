@@ -1,6 +1,17 @@
 [user]
-    name = chaCon
+    name = Octavio Montt
+    username = L-chaCon
     email = montt.octavio@gmail.com 
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID/vG4bycuhGG0RJF0Gthq0NOmEKBplPundgB4uE+8Lj
+
+[gpg]
+    format = ssh
+
+[gpg "ssh"]
+    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[commit]
+    gpgsign = true
 
 [init]
     defaultBranch = main
