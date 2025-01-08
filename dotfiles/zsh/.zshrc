@@ -9,6 +9,10 @@ set -o vi
 export PATH="$PATH:$HOME/.local/neovim/bin"
 # Zig Path
 export PATH="$PATH:$HOME/.local/.zig/zig-macos-aarch64-0.13.0/"
+# RD PATH
+export PATH="$PATH:$HOME/.rd/bin"
+# MYSQL 
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 # MAN & HELP
 export MANPATH="/usr/local/man:$MANPATH"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -80,7 +84,7 @@ alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
 # ---- Tmux Sessionizer (based on ThePrimagen)
-export FZF_SEARCH_FOLDERS="$HOME/workspace/github.com"
+export FZF_SEARCH_FOLDERS="$HOME/workspace/github.com:$HOME/Documents/git"
 bindkey -s "^ " 'source ~/.local/scripts/tmux-sessionizer\n'
 # Zoxide 
 eval "$(zoxide init zsh --cmd cd)"

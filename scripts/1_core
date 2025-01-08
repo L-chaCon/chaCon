@@ -49,7 +49,7 @@ if [[ $1 = "iOS" ]]; then
         echo "- Homebrew is already installed."
     fi
     brew update && brew upgrade && brew cleanup
-    brew install tree sshs tldr ripgrep
+    brew install tree sshs tldr ripgrep mysql
 
     echo "Checking for JetBrains font"
     if ls $HOME/Library/Fonts | grep -q JetBrainsMonoNLNerdFont; then
