@@ -103,3 +103,7 @@ eval "$(starship init zsh)"
 # Generated for envman. Do not edit. Esto se instalo con github, es para 
 # instalar programs desde scripts
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+# Tails
+alias aws-login="aws sso login --sso-session tails && aws-docker-login"
+alias aws-docker-login="aws ecr get-login-password --region eu-west-1 --profile=production | docker login --username AWS --password-stdin 426105708615.dkr.ecr.eu-west-1.amazonaws.com"
