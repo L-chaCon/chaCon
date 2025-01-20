@@ -1,8 +1,0 @@
-- name: Install alacritty
-  shell: pacman -S alacritty
-
-- name: Create Alacritty Theme dir
-  shell: mkdir -p ~/.config/alacritty/themes
-
-- name: Clone Alacritty Theme
-  shell: git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes 

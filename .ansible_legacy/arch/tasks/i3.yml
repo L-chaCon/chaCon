@@ -1,9 +1,0 @@
-- name: Install System Packages
-  pacman: name={{item}}
-  with_items:
-    - i3
-    - dmenu
-    - feh
-  tags:
-    - install
-    - i3

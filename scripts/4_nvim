@@ -1,7 +1,8 @@
 #!/bin/bash
 
+
 # NOTE: iOS
-if [[ $1 = "iOS" ]]; then
+if [[ $1 = "Darwin" ]]; then
     echo "Cheking NeoVim"
     if [[ ! -d $HOME/.local/neovim_git ]]; then
         echo "- Neovim is not installed. Installing Neovim..."

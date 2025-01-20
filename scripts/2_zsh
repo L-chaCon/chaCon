@@ -1,40 +1,44 @@
 #!/bin/bash
+# $1 -> This is the "os" variable ("Darwin": iOS, )
+# $2 -> This is the "container" variable ("0": false, "1": true)
 
-if [[ $1 = "iOS" ]]; then
-    echo "Checking ZSH"
-    if ! command -v zsh &>/dev/null; then
-        echo "- ZSH is not installed. Installing ZSH..."
-        brew install zsh
-    else
-        echo "- ZSH is already installed."
+if [[ $2 == "0" ]]; then
+    # NOTE: iOS
+    if [[ $1 == "Darwin" ]]; then
+        echo "Checking ZSH"
+        if ! command -v zsh &>/dev/null; then
+            echo "- ZSH is not installed. Installing ZSH..."
+            brew install zsh
+        else
+            echo "- ZSH is already installed."
+        fi
+        
+        echo "Installing command line tools"
+        brew install fzf fd bat git-delta lsd starship
+
+        echo "Checking Oh My Zsh"
+        if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+            echo "- Oh My Zsh is not installed. Installing Oh My Zsh..."
+            sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+            git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+            git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+        else
+            echo "- Oh My Zsh is already installed."
+        fi
+
+        echo  "Cheking Git fzf"
+        if [[ ! -d "$HOME/.fzf-git.sh" ]]; then
+            echo "- Git fzf is not installed. Installing Git fzf..."
+            git clone https://github.com/junegunn/fzf-git.sh.git $HOME/.fzf-git.sh
+        else
+            echo "- Git fzf is already installed."
+        fi
+
+    # NOTE: Ubuntu
+    elif [[ $1 == "ubuntu" ]]; then
+        echo "ubuntu"
     fi
-    
-    echo "Installing command line tools"
-    brew install fzf fd bat git-delta lsd starship
-
-    echo "Checking Oh My Zsh"
-    if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
-        echo "- Oh My Zsh is not installed. Installing Oh My Zsh..."
-        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-    else
-        echo "- Oh My Zsh is already installed."
-    fi
-
-    echo  "Cheking Git fzf"
-    if [[ ! -d "$HOME/.fzf-git.sh" ]]; then
-        echo "- Git fzf is not installed. Installing Git fzf..."
-        git clone https://github.com/junegunn/fzf-git.sh.git $HOME/.fzf-git.sh
-    else
-        echo "- Git fzf is already installed."
-    fi
-
-
-# NOTE: Ubuntu
-elif [[ $1 == "ubuntu" ]]; then
-    echo "ubuntu"
-# NOTE: Debian
-elif [[ $1 == "debian" ]]; then
-    echo "debian"
-fi
+elif [[ $2 == "0" ]]; then
+    echo "DevContainer run -> 2_zsh skiped"
+else
+    echo "unknown option: $2"

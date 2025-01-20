@@ -1,38 +1,42 @@
 #!/bin/bash
+# $1 -> This is the "os" variable ("Darwin": iOS, )
+# $2 -> This is the "container" variable ("0": false, "1": true)
 
-# NOTE: iOS
-if [[ $1 = "iOS" ]]; then
-    echo "Checking Tmux"
-    if [[ ! -d "$HOME/.tmux" ]]; then
-        echo "- Tmux is not installed. Installing Tmux..."
-        brew install tmux
-        mkdir $HOME/.tmux && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    else
-        echo "- Tmux is already installed."
-    fi
+if [[ $2 == "0" ]]; then
+    # NOTE: iOS
+    if [[ $1 = "Darwin" ]]; then
+        echo "Checking Tmux"
+        if [[ ! -d "$HOME/.tmux" ]]; then
+            echo "- Tmux is not installed. Installing Tmux..."
+            brew install tmux
+            mkdir $HOME/.tmux && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+        else
+            echo "- Tmux is already installed."
+        fi
 
-    echo "Checking Gitmux"
-    if ! command -v gitmux &>/dev/null; then
-        echo "- Gitmux is not installed. Installing Gitmux..."
-        brew tap arl/arl && brew install gitmux
-    else
-        echo "- Gitmux is already installed."
-    fi
+        echo "Checking Gitmux"
+        if ! command -v gitmux &>/dev/null; then
+            echo "- Gitmux is not installed. Installing Gitmux..."
+            brew tap arl/arl && brew install gitmux
+        else
+            echo "- Gitmux is already installed."
+        fi
 
-    echo "Checking Tmux Catppuccin"
-    if [[ ! -d "$HOME/.config/tmux/plugins/catppuccin" ]]; then
-        echo "- Tmux Catppuccin not installed. Installing Gitmux..."
-        mkdir -p $HOME/.config/tmux/plugins/catppuccin
-        git clone -b v2.1.2 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
-    else
-        echo "- Tmux Catppuccin is already installed."
-    fi
+        echo "Checking Tmux Catppuccin"
+        if [[ ! -d "$HOME/.config/tmux/plugins/catppuccin" ]]; then
+            echo "- Tmux Catppuccin not installed. Installing Gitmux..."
+            mkdir -p $HOME/.config/tmux/plugins/catppuccin
+            git clone -b v2.1.2 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
+        else
+            echo "- Tmux Catppuccin is already installed."
+        fi
 
 
-# NOTE: Ubuntu
-elif [[ $1 == "ubuntu" ]]; then
-    echo "ubuntu"
-# NOTE: Debian
-elif [[ $1 == "debian" ]]; then
-    echo "debian"
-fi
+    # NOTE: Ubuntu
+    elif [[ $1 == "ubuntu" ]]; then
+        echo "ubuntu"
+
+elif [[ $2 == "0" ]]; then
+    echo "DevContainer run -> 3_tmux skiped"
+else
+    echo "unknown option: $2"

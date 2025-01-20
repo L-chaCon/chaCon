@@ -1,18 +1,38 @@
 #!/bin/bash
 
-echo "Creating base folders"
-mkdir -p $HOME/workspace/work $HOME/workspace/personal $HOME/workspace/github.com/chaCon $HOME/workspace/projects
+# $1 -> This is the "os" variable ("Darwin": iOS, )
+# $2 -> This is the "container" variable ("0": false, "1": true)
 
-echo "Cheking for ssh key"
-if ls $HOME/.ssh | grep -q "chacon"; then
-    echo "- SSH key found at: $HOME/.ssh/chacon"
-    echo "- Add the key to GitHub. Have you done it? (y/n)"
-    read answer
+if [[ $2 == "0" ]]; then
+    echo "Creating base folders"
+    mkdir -p $HOME/workspace/work $HOME/workspace/personal $HOME/workspace/github.com/chaCon $HOME/workspace/projects
+
+    echo "Cheking for ssh key"
+    if ls $HOME/.ssh | grep -q "chacon"; then
+        echo "- SSH key found at: $HOME/.ssh/chacon"
+        echo "- Add the key to GitHub. Have you done it? (y/n)"
+        read answer
+    else
+        echo "- Creating SSH key ED25519"
+        ssh-keygen -t ed25519 -C "montt.octavio@gmail.com" -f $HOME/.ssh/chacon -N ""
+        echo "- Add the key to GitHub. Have you done it? (y/n)"
+        read answer
+    fi
+    echo "Cheking for git folders"
+    if [[ ! -d "$HOME/workspace/notes" ]];then
+        git clone git@github.com:L-chaCon/notes.git $HOME/workspace/notes
+    fi
+    if [[ ! -d "$HOME/Documents/personal" ]];then
+        git clone git@github.com:L-chaCon/Documents.git $HOME/Documents/personal
+    fi
+    if [[ ! -d "$HOME/Pictures/personal" ]];then
+        git clone git@github.com:L-chaCon/Images.git $HOME/Pictures/personal
+    fi
+elif [[ $2 == "1"]]; then
+   #TODO: AQUI TENGO QUE AGREGAR LAS COSAS BASICAS PARA EL CONTAINER 
+   echo "AQUI ESTA LO DEL CONTAINER"
 else
-    echo "- Creating SSH key ED25519"
-    ssh-keygen -t ed25519 -C "montt.octavio@gmail.com" -f $HOME/.ssh/chacon -N ""
-    echo "- Add the key to GitHub. Have you done it? (y/n)"
-    read answer
+    echo "unknown option: $2"
 fi
 
 # TODO: PROPAGETE THE EXIT
@@ -21,19 +41,7 @@ fi
 #     exit 1
 # fi
 
-echo "Cheking for git folders"
-if [[ ! -d "$HOME/workspace/notes" ]];then
-    git clone git@github.com:L-chaCon/notes.git $HOME/workspace/notes
-fi
-if [[ ! -d "$HOME/Documents/personal" ]];then
-    git clone git@github.com:L-chaCon/Documents.git $HOME/Documents/personal
-fi
-if [[ ! -d "$HOME/Pictures/personal" ]];then
-    git clone git@github.com:L-chaCon/Images.git $HOME/Pictures/personal
-fi
-
-# NOTE: iOS
-if [[ $1 = "iOS" ]]; then
+if [[ $1 = "Darwin" ]]; then
     echo "Checking Homebrew"
     # BUG: HAY algunos problemas con que no reconoce brew en los siguentes
     # Por mientras mejor instalarlo primero asegurase que funciona y despues
@@ -85,10 +93,6 @@ if [[ $1 = "iOS" ]]; then
         echo "- Htop is already installed."
     fi
 
-# NOTE: Ubuntu
-elif [[ $1 == "ubuntu" ]]; then
-    echo "ubuntu"
-# NOTE: Debian
-elif [[ $1 == "debian" ]]; then
-    echo "debian"
+elif [[ $1 == "Linux" ]]; then
+    echo "Entre"
 fi

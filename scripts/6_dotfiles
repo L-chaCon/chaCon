@@ -22,7 +22,6 @@ if [[ $1 = "iOS" ]]; then
     done
     cd $current_folder
 
-
 # NOTE: Ubuntu
 elif [[ $1 == "ubuntu" ]]; then
     echo "ubuntu"

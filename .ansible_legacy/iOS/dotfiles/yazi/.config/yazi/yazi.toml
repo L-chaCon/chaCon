@@ -1,8 +1,0 @@
-[manager]
-show_hidden=true
-sort_dir_first=true
-ratio=[1,4,3]
-linemode="size"
-
-[preview]
-tab_size=4

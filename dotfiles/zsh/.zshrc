@@ -107,3 +107,31 @@ eval "$(starship init zsh)"
 # Tails
 alias aws-login="aws sso login --sso-session tails && aws-docker-login"
 alias aws-docker-login="aws ecr get-login-password --region eu-west-1 --profile=production | docker login --username AWS --password-stdin 426105708615.dkr.ecr.eu-west-1.amazonaws.com"
+
+tails-pip () {
+    CA_TOKEN=$(aws codeartifact get-authorization-token --profile production --domain tails --domain-owner 426105708615 --query authorizationToken --output text)
+    INDEX_URL="https://aws:$CA_TOKEN@tails-426105708615.d.codeartifact.eu-west-1.amazonaws.com/pypi/tails/simple/"
+    echo "[global]\nindex-url = $INDEX_URL" > ./.venv/pip.conf
+    printf "venv pip config set to use Tails PyPi\n"
+    printf "$(cat ./.venv/pip.conf)"
+    printf "\n"
+}
+
+tails-pip-venv () {
+    CA_TOKEN=$(aws codeartifact get-authorization-token --profile production --domain tails --domain-owner 426105708615 --query authorizationToken --output text)
+    INDEX_URL="https://aws:$CA_TOKEN@tails-426105708615.d.codeartifact.eu-west-1.amazonaws.com/pypi/tails/simple/"
+    echo "[global]\nindex-url = $INDEX_URL" > ./venv/pip.conf
+    printf "venv pip config set to use Tails PyPi\n"
+    printf "$(cat ./venv/pip.conf)"
+    printf "\n"
+}
+
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+
+poetry-export () {
+    poetry export --without-urls --without-hashes --only debug >> requirements-debug.txt
+    poetry export --without-urls --without-hashes >> requirements.txt
+}
