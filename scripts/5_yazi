@@ -19,7 +19,7 @@ if [[ $2 == "0" ]]; then
     elif [[ $1 == "debian" ]]; then
         echo "debian"
     fi
-elif [[ $2 == "0" ]]; then
+elif [[ $2 == "1" ]]; then
     echo "DevContainer run -> 2_zsh skiped"
 else
     echo "unknown option: $2"

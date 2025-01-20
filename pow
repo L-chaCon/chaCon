@@ -1,5 +1,4 @@
 #!/bin/bash
-
 script_dir="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
 os="$(uname)"
 dry="0"
@@ -50,11 +49,11 @@ log "*-*   *-*   *POW!*   *-*   *-*"
 actions=("BANG!" "ZAP!" "CRASH!" "POOF!" "BAM!")
 length=${#actions[@]}
 
-# count=0
-# for script in $scripts; do
-#     log "   *   ${actions[$((count % length))]}   *   "
-#     log "running script: $script"
-#     execute ./$script $os $container
-#     ((count++))
-#     log " ---   ---   ---   ---   ---   ---"
-# done
+count=0
+for script in $scripts; do
+    log "   *   ${actions[$((count % length))]}   *   "
+    log "running script: $script"
+    execute ./$script $os $container
+    ((count++))
+    log " ---   ---   ---   ---   ---   ---"
+done

@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # $1 -> This is the "os" variable ("Darwin": iOS, )
 # $2 -> This is the "container" variable ("0": false, "1": true)
 
@@ -28,18 +27,13 @@ if [[ $2 == "0" ]]; then
     if [[ ! -d "$HOME/Pictures/personal" ]];then
         git clone git@github.com:L-chaCon/Images.git $HOME/Pictures/personal
     fi
-elif [[ $2 == "1"]]; then
-   #TODO: AQUI TENGO QUE AGREGAR LAS COSAS BASICAS PARA EL CONTAINER 
-   echo "AQUI ESTA LO DEL CONTAINER"
+elif [[ $2 == "1" ]]; then
+    # Set up XDG_CONFIG_HOME
+    export XDG_CONFIG_HOME="$HOME"/.config
+    mkdir -p "$XDG_CONFIG_HOME"
 else
     echo "unknown option: $2"
 fi
-
-# TODO: PROPAGETE THE EXIT
-# if [[ $answer != 'y' ]]; then
-#     echo "- Go and added it!!"
-#     exit 1
-# fi
 
 if [[ $1 = "Darwin" ]]; then
     echo "Checking Homebrew"
@@ -67,7 +61,6 @@ if [[ $1 = "Darwin" ]]; then
         echo "- JetBrais Nerd Font already installed."
     fi
 
-    
     # TODO: HACER UN SCRIPT PARA USAR `tldr` funciona tldr -C (lo que busco) | bat
 
     echo "Checking Ghostty"
@@ -94,5 +87,8 @@ if [[ $1 = "Darwin" ]]; then
     fi
 
 elif [[ $1 == "Linux" ]]; then
-    echo "Entre"
+    sudo apt upgrade -y && sudo apt update -y
+    sudo apt install -y tree tldr ripgrep mysql-server cmake
+    curl https://sh.rustup.rs -sSf | sh
+    . "$HOME/.cargo/env"
 fi

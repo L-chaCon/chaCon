@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # NOTE: iOS
-if [[ $1 = "iOS" ]]; then
+if [[ $1 = "Darwin" ]]; then
     if ! command -v stow &>/dev/null;then
         echo "- Stow is not installed. Installing Stow..."
         brew install stow
@@ -9,23 +9,29 @@ if [[ $1 = "iOS" ]]; then
         echo "- Stow is already installed."
     fi
 
-    current_folder=$(pwd)
-    rm -rf $HOME/.zshrc
-
-    echo "Creating links to dotfiles"
-    cd dotfiles
-    ./install
-    for item in "${STOW_FOLDERS[@]}"; do
-        echo "- stow $item -t $HOME"
-        stow -D $item -t $HOME
-        stow $item -t $HOME
-    done
-    cd $current_folder
-
 # NOTE: Ubuntu
-elif [[ $1 == "ubuntu" ]]; then
-    echo "ubuntu"
+elif [[ $1 == "Linux" ]]; then
+    if ! command -v stow &>/dev/null;then
+        echo "- Stow is not installed. Installing Stow..."
+        sudo apt install stow
+    else
+        echo "- Stow is already installed."
+    fi
+
 # NOTE: Debian
 elif [[ $1 == "debian" ]]; then
     echo "debian"
 fi
+
+current_folder=$(pwd)
+rm -rf $HOME/.zshrc
+
+echo "Creating links to dotfiles"
+cd dotfiles
+./install
+for item in "${STOW_FOLDERS[@]}"; do
+    echo "- stow $item -t $HOME"
+    stow -D $item -t $HOME
+    stow $item -t $HOME
+done
+cd $current_folder
