@@ -17,7 +17,7 @@ if [[ $1 == "Darwin" ]]; then
 
 
 # NOTE: Ubuntu
-elif [[ $1 == "ubuntu" ]]; then
+elif [[ $1 == "Linux" ]]; then
     echo "Checking ZSH"
     if ! command -v zsh &>/dev/null; then
         echo "- ZSH is not installed. Installing ZSH..."
@@ -25,21 +25,40 @@ elif [[ $1 == "ubuntu" ]]; then
     else
         echo "- ZSH is already installed."
     fi
-    
-    echo "Installing command line tools"
-    sudo apt install -y fzf fd-find bat 
+
+    echo "Installing Cargo..."
+    curl https://sh.rustup.rs -sSf | sh -s -- -yq
+    . "$HOME/.cargo/env"
+
+    echo "Installing command line tools..."
+    sudo apt install -y fzf fd-find bat zoxide
     cargo install lsd
     cargo install starship --locked
+    curl -fsSL https://pyenv.run | bash
 fi
 
 echo "Checking Oh My Zsh"
 if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
     echo "- Oh My Zsh is not installed. Installing Oh My Zsh..."
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 else
     echo "- Oh My Zsh is already installed."
+fi
+
+echo "Checking Zsh Auto Suggestions"
+if [[ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]]; then
+    echo "- Auto Suggestion is not installed. Installing Auto Suggestions..."
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+else
+    echo "- Auto Suggestion is already installed."
+fi
+
+echo "Checking Zsh Syntax Highlighting"
+if [[ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]]; then
+    echo "- Syntax Highlighting is not installed. Installing Syntax Highlighting..."
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+else
+    echo "- Syntax Highlighting is already installed."
 fi
 
 echo  "Cheking Git fzf"

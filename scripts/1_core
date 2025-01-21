@@ -89,6 +89,4 @@ if [[ $1 = "Darwin" ]]; then
 elif [[ $1 == "Linux" ]]; then
     sudo apt upgrade -y && sudo apt update -y
     sudo apt install -y tree tldr ripgrep mysql-server cmake
-    curl https://sh.rustup.rs -sSf | sh
-    . "$HOME/.cargo/env"
 fi
