@@ -1,3 +1,4 @@
 font-size = 16
 theme = "chaCon"
 keybind = global:cmd+grave_accent=toggle_quick_terminal
+window-decoration = false
