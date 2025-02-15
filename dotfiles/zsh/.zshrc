@@ -1,3 +1,10 @@
+# ---- Tmux Sessionizer (based on ThePrimagen)
+export FZF_SEARCH_FOLDERS="$HOME/workspace/github.com:\
+$HOME/workspace/github.com/tails-monoloth:\
+$HOME/workspace/github.com/tails.com:\
+$HOME/workspace/github.com/chaCon"
+bindkey -s "^ " 'source ~/.local/scripts/tmux-sessionizer\n'
+# -- Oh My Zsh
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""
 CASE_SENSITIVE="true"
@@ -76,16 +83,17 @@ _fzf_comprun() {
   esac
 }
 # ----- Bat (better cat) -----
-alias cat='bat'
+if [[ $(uname) == "Darwin" ]]; then
+  alias cat='bat'
+elif [[ $(uname) == "Linux" ]]; then
+  alias cat='batcat'
+fi
 # ---- LSD (better ls) -----
 alias ls="lsd"
 alias l='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
-# ---- Tmux Sessionizer (based on ThePrimagen)
-export FZF_SEARCH_FOLDERS="$HOME/workspace/github.com:$HOME/Documents/git"
-bindkey -s "^ " 'source ~/.local/scripts/tmux-sessionizer\n'
 # Zoxide 
 eval "$(zoxide init zsh --cmd cd)"
 # Yazi
@@ -104,7 +112,12 @@ eval "$(starship init zsh)"
 # instalar programs desde scripts
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
-# Tails
+# Pytest
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+
+#### Tails --------------------------------------------------------------------
 alias aws-login="aws sso login --sso-session tails && aws-docker-login"
 alias aws-docker-login="aws ecr get-login-password --region eu-west-1 --profile=production | docker login --username AWS --password-stdin 426105708615.dkr.ecr.eu-west-1.amazonaws.com"
 
