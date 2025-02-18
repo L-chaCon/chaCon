@@ -20,15 +20,22 @@ export PATH="$PATH:$HOME/.local/.zig/zig-macos-aarch64-0.13.0/"
 export PATH="$PATH:$HOME/.rd/bin"
 # MYSQL 
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+# ----- Bat (better cat) -----
+if [[ $(uname) == "Darwin" ]]; then
+  BAT="bat"
+elif [[ $(uname) == "Linux" ]]; then
+  BAT="batcat"
+fi
+alias cat=$BAT
 # MAN & HELP
 export MANPATH="/usr/local/man:$MANPATH"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
-alias bathelp='bat --plain --language=help'
+alias bathelp="$BAT --plain --language=help"
 help() {
     "$@" --help 2>&1 | bathelp
 }
-alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+alias -g -- --help="--help 2>&1 | bathelp"
 # USER
 export LANG=en_GB.UTF-8
 export PAGER="less"
@@ -37,7 +44,6 @@ export EDITOR="nvim"
 export PATH="$HOME/go/bin:$PATH"
 # ALIAS
 alias rm="rm -iv"
-alias sve="source .venv/bin/activate"
 # ---- FZF -----
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
@@ -82,12 +88,6 @@ _fzf_comprun() {
     *)            fzf --preview "bat -n --color=always --line-range :500 {}" "$@" ;;
   esac
 }
-# ----- Bat (better cat) -----
-if [[ $(uname) == "Darwin" ]]; then
-  alias cat='bat'
-elif [[ $(uname) == "Linux" ]]; then
-  alias cat='batcat'
-fi
 # ---- LSD (better ls) -----
 alias ls="lsd"
 alias l='ls -l'
@@ -110,10 +110,14 @@ eval "$(starship init zsh)"
 # Generated for envman. Do not edit. Esto se instalo con github, es para 
 # instalar programs desde scripts
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
-# Pytest
+# PYENV
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
+eval "$(pyenv virtualenv-init -)"
+alias pvc="pyenv virtualenv"
+alias pvd="pyenv deactivate"
+alias pva="pyenv activate"
 # Poetry
 poetry-export () {
     poetry export --without-urls --without-hashes --only debug >> requirements-debug.txt
