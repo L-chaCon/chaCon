@@ -1,4 +1,7 @@
-font-size = 16
+font-size = 20
 theme = "chaCon"
 keybind = global:cmd+grave_accent=toggle_quick_terminal
 window-decoration = false
+cursor-style = bar
+cursor-style-blink = true
+shell-integration = zsh
