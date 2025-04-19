@@ -24,7 +24,7 @@ elif [[ $1 == "debian" ]]; then
 fi
 
 current_folder=$(pwd)
-rm -rf $HOME/.zshrc
+echo 'source $HOME/.zshrc.chaCon' < $HOME/.zshrc
 
 echo "Creating links to dotfiles"
 cd dotfiles
