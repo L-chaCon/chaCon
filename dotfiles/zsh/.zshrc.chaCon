@@ -4,10 +4,6 @@ ZSH_THEME=""
 CASE_SENSITIVE="true"
 
 #chaCon
-export FZF_SEARCH_FOLDERS="\
-  $HOME/github.com/tails-monoloth:\
-  $HOME/github.com/tails.com:\
-  "
 bindkey -s "^o" 'source ~/.local/scripts/tmux-sessionizer\n'
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf poetry)
 source $ZSH/oh-my-zsh.sh
