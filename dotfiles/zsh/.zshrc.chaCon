@@ -50,6 +50,8 @@ export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 #go
 export PATH="$HOME/go/bin:$PATH"
 
+# SCRIPTS
+source $HOME/.local/scripts/python.sh
 
 # TOOLS
 #ghostty
