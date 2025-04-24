@@ -1,0 +1,68 @@
+##### Bar Appearance #####
+source "$CONFIG_DIR/colors.sh"
+source "$CONFIG_DIR/settings.sh"
+
+##### Bar Appearance #####
+bar=(
+  position=top 
+  height=$BAR_HIGHT
+  color=$BACKGROUND
+  topmost=window
+)
+sketchybar --bar "${bar[@]}"
+
+##### Changing Defaults #####
+default=(
+  padding_left=5
+  padding_right=5
+  icon.font="Symbols Nerd Font Mono"
+  icon.font.size=$FONT_SIZE
+  label.font="$FONT:Bold:$FONT_SIZE"
+  icon.color=$FOREGROUND
+  label.color=$FOREGROUND
+  icon.padding_left=10
+  icon.padding_right=10
+  label.padding_left=10
+  label.padding_right=10
+  background.color=$BACKGROUND
+)
+sketchybar --default "${default[@]}"
+
+##### Adding Events #####
+sketchybar --add event aerospace_workspace_change
+
+##### Adding Left Items #####
+source "$PLUGINS_DIR/apple.sh"
+source "$ITEMS_DIR/space.sh"
+source "$ITEMS_DIR/front_app.sh"
+
+##### Adding Right Items #####
+source "$ITEMS_DIR/clock.sh"
+source "$ITEMS_DIR/sys.sh"
+
+##### Force all scripts to run the first time (never do this in a script) #####
+sketchybar --update
+
+
+
+##### Adding Left Items #####
+
+
+sketchybar --add item chevron left \
+           --set chevron icon= label.drawing=off \
+           --add item front_app left \
+           --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
+           --subscribe front_app front_app_switched
+
+##### Adding Right Items #####
+sketchybar --add item clock right \
+           --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh" \
+           --add item volume right \
+           --set volume script="$PLUGIN_DIR/volume.sh" \
+           --subscribe volume volume_change \
+           --add item battery right \
+           --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
+           --subscribe battery system_woke power_source_change
+
+##### Force all scripts to run the first time (never do this in a script) #####
+sketchybar --update
