@@ -1,3 +1,6 @@
+[alias]
+    glog = log --oneline --graph --decorate
+
 [user]
     name = Octavio Montt
     username = L-chaCon
@@ -27,12 +30,3 @@
     navigate = true  # use n and N to move between diff sections
     dark = true      # or light = true, or omit for auto-detection
     line-numbers = true
-
-[alias]
-    glog = log --oneline --graph --decorate
-
-[includeIf "gitdir:~/github.com/tails.com/"]
-    path = ~/.gitconfig.tails
-
-[includeIf "gitdir:~/github.com/tails-monoloth/"]
-    path = ~/.gitconfig.tails
