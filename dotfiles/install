@@ -1,8 +1,14 @@
 #!/bin/bash
 
-STOW_FOLDERS=("tmux" "bin" "bat" "zsh" "git" "starship" "yazi" "ghostty")
+FOLDERS=()
 
-for item in "${STOW_FOLDERS[@]}"; do
+for dir in */ ; do
+    if [ -d "$dir" ]; then
+        FOLDERS+=("${dir%/}")
+    fi
+done
+
+for item in "${FOLDERS[@]}"; do
     echo "- stow $item -t $HOME"
     stow -D $item -t $HOME
     stow $item -t $HOME

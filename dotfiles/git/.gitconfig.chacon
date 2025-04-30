@@ -1,3 +1,6 @@
+[alias]
+    glog = log --oneline --graph --decorate
+
 [user]
     name = Octavio Montt
     username = L-chaCon
