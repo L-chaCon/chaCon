@@ -1,0 +1,37 @@
+#!/bin/bash
+BLACK=0xff000000 #000000
+RED=0xffff3399 #ff3399
+GREEN=0xff25be6a #25be6a
+YELLOW=0xff07faf2 #07faf2
+BLUE=0xff80a9ff #80a9ff
+MAGENTA=0xffbe95ff #be95ff
+CYAN=0xff06dbf2 #06dbf2
+WHITE=0xfff2f2f2 #f2f2f2
+GREY=0xff282828 #282828
+L_RED=0xfff16da6 #f16da6
+L_GREEN=0xff46c880 #46c880
+L_YELLOW=0xff2dc7c4 #2dc7c4
+L_BLUE=0xff8cb6ff #8cb6ff
+L_MAGENTA=0xffc8a5ff #c8a5ff
+L_CYAN=0xff00ffff #00ffff
+L_WHITE=0xffffffff #ffffff
+BACKGROUND=0xff000000 #000000
+FOREGROUND=0xffffffff #ffffff
+CURSOR_COLOR=0xffffffff #ffffff
+SELECTION_BACKGROUND=0xff626880 #626880
+SELECTION_FOREGROUND=0xffc6d0f5 #c6d0f5
+
+COMMENT=0xff738091 #738091
+bg0=0xff131a24 #131a24
+bg1=0xff192330 #192330
+bg2=0xff212e3f #212e3f
+bg3=0xff29394f #29394f
+bg4=0xff39506d #39506d
+fg0=0xffd6d6d7 #d6d6d7
+fg1=0xffcdcecf #cdcecf
+fg2=0xffaeafb0 #aeafb0
+fg3=0xff71839b #71839b
+sel0=0xff2b3b51 #2b3b51
+sel1=0xff3c5372 #3c5372
+
+TRANSPARENT=0x00000000
