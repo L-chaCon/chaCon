@@ -19,6 +19,7 @@
 [core]
     pager = delta
     sshCommand = "ssh -i ~/.ssh/chacon"
+    excludesFile = "~/.gitignore.chaCon"
 
 [interactive]
     diffFilter = delta --color-only
@@ -27,3 +28,13 @@
     navigate = true  # use n and N to move between diff sections
     dark = true      # or light = true, or omit for auto-detection
     line-numbers = true
+
+[merge]
+	tool = "nvim"
+
+[mergetool]
+	keepBackup = false
+	prompt = false
+
+[mergetool "nvim"]
+	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
