@@ -2,5 +2,6 @@
 
 - [ ] hacer sketchybar como me gusta
   - [ ] modulo CPU quieres RAM y mas weas
-  - [ ] Hacer funcionar el aerospace
-- [ ] estudiar aerospace
+  - [X] Hacer funcionar el aerospace
+- [X] estudiar aerospace
+- [ ] Arreglar el sessonizer
