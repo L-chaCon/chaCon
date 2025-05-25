@@ -1,7 +1,7 @@
 [manager]
 show_hidden=true
 sort_dir_first=true
-ratio=[1,4,3]
+ratio=[3,4,5]
 linemode="size"
 
 [preview]

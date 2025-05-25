@@ -39,7 +39,7 @@ alias lt='ls --tree'
 
 #PATHS
 #nvim
-export PATH="$PATH:$HOME/.local/neovim/bin"
+export PATH="$PATH:$HOME/.local/nvim/bin"
 #mysql
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 #go
