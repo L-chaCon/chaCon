@@ -1,11 +1,11 @@
 #!/bin/bash
+OS=$1
+CONTAINER=$2
 
-if [[ $2 == "0" ]]; then
-
-    # NOTE: iOS
-    if [[ $1 == "Darwin" ]]; then
+if [[ $CONTAINER == "0" ]]; then
+    if [[ $OS == "Darwin" ]]; then
         echo "Cheking NeoVim"
-        if [[ ! -d $HOME/.local/neovim_git ]]; then
+        if [[ ! -d $HOME/.local/neovim ]]; then
             echo "- Neovim is not installed. Installing Neovim..."
             current_path=$(pwd)
             git clone git@github.com:neovim/neovim.git $HOME/.local/neovim
@@ -14,7 +14,7 @@ if [[ $2 == "0" ]]; then
             xcode-select --install
             brew install ninja cmake gettext curl luajit pyright
             rm -r build/
-            make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local/neovim"
+            make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local/nvim"
             make install
             cd $current_path
         else
@@ -30,14 +30,6 @@ if [[ $2 == "0" ]]; then
             echo "- Config is already installed."
         fi
 
-
-    # NOTE: Ubuntu
-    elif [[ $1 == "ubuntu" ]]; then
-        echo "ubuntu"
-    # NOTE: Debian
-    elif [[ $1 == "debian" ]]; then
-        echo "debian"
-    fi
 
 elif [[ $2 == "1" ]]; then
     echo "HOLO"

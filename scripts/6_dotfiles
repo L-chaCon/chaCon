@@ -1,7 +1,10 @@
 #!/bin/bash
+OS=$1
+CONTAINER=$2
+
 
 # NOTE: iOS
-if [[ $1 = "Darwin" ]]; then
+if [[ $OS = "Darwin" ]]; then
     if ! command -v stow &>/dev/null;then
         echo "- Stow is not installed. Installing Stow..."
         brew install stow
@@ -10,7 +13,7 @@ if [[ $1 = "Darwin" ]]; then
     fi
 
 # NOTE: Ubuntu
-elif [[ $1 == "Linux" ]]; then
+elif [[ $OS == "Linux" ]]; then
     if ! command -v stow &>/dev/null;then
         echo "- Stow is not installed. Installing Stow..."
         sudo apt install stow
@@ -18,10 +21,6 @@ elif [[ $1 == "Linux" ]]; then
         echo "- Stow is already installed."
     fi
 
-# NOTE: Debian
-elif [[ $1 == "debian" ]]; then
-    echo "debian"
-fi
 
 current_folder=$(pwd)
 echo 'source $HOME/.zshrc.chaCon' < $HOME/.zshrc

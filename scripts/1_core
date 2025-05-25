@@ -1,57 +1,42 @@
 #!/bin/bash
 # $1 -> This is the "os" variable ("Darwin": iOS, )
 # $2 -> This is the "container" variable ("0": false, "1": true)
+IOS=$1
+CONTAINER=$2
+PERSONAL=0  #falso
 
-if [[ $2 == "0" ]]; then
-    echo "Creating base folders"
-    mkdir -p $HOME/workspace/work $HOME/workspace/personal $HOME/workspace/github.com/chaCon $HOME/workspace/projects
+echo "Creating base folders"
+mkdir -p $HOME/workspace $HOME/github.com/chaCon
 
-    echo "Cheking for ssh key"
-    if ls $HOME/.ssh | grep -q "chacon"; then
-        echo "- SSH key found at: $HOME/.ssh/chacon"
-        echo "- Add the key to GitHub. Have you done it? (y/n)"
-        read answer
-    else
-        echo "- Creating SSH key ED25519"
-        ssh-keygen -t ed25519 -C "montt.octavio@gmail.com" -f $HOME/.ssh/chacon -N ""
-        echo "- Add the key to GitHub. Have you done it? (y/n)"
-        read answer
-    fi
-    echo "Cheking for git folders"
-    if [[ ! -d "$HOME/workspace/notes" ]];then
-        git clone git@github.com:L-chaCon/notes.git $HOME/workspace/notes
-    fi
-    if [[ ! -d "$HOME/Documents/personal" ]];then
-        git clone git@github.com:L-chaCon/Documents.git $HOME/Documents/personal
-    fi
-    if [[ ! -d "$HOME/Pictures/personal" ]];then
-        git clone git@github.com:L-chaCon/Images.git $HOME/Pictures/personal
-    fi
-elif [[ $2 == "1" ]]; then
-    # Set up XDG_CONFIG_HOME
-    export XDG_CONFIG_HOME="$HOME"/.config
-    mkdir -p "$XDG_CONFIG_HOME"
+echo "Cheking for ssh key"
+if ls $HOME/.ssh | grep -q "chacon"; then
+    echo "- SSH key found at: $HOME/.ssh/chacon"
+    echo "- Add the key to GitHub. Have you done it? (y/n)"
+    read answer
 else
-    echo "unknown option: $2"
+    echo "- Creating SSH key ED25519"
+    ssh-keygen -t ed25519 -C "montt.octavio@gmail.com" -f $HOME/.ssh/chacon -N ""
+    echo "- Add the key to GitHub. Have you done it? (y/n)"
+    read answer
+fi
+echo "Cheking for git folders"
+if [[ ! -d "$HOME/workspace/notes" ]];then
+    git clone git@github.com:L-chaCon/notes.git $HOME/workspace/notes
+fi
+if [[ $PERSONAL != "0" ]];then
+  if [[ ! -d "$HOME/Documents/personal" ]];then
+      git clone git@github.com:L-chaCon/Documents.git $HOME/Documents/personal
+  fi
+  if [[ ! -d "$HOME/Pictures/personal" ]];then
+      git clone git@github.com:L-chaCon/Images.git $HOME/Pictures/personal
+  fi
 fi
 
+
 if [[ $1 = "Darwin" ]]; then
-    echo "Checking Homebrew"
-    # BUG: HAY algunos problemas con que no reconoce brew en los siguentes
-    # Por mientras mejor instalarlo primero asegurase que funciona y despues
-    # correr
-    if ! command -v brew &>/dev/null; then
-        echo "- Homebrew is not installed. Installing Homebrew..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        export PATH=/usr/local/bin:$PATH >> $HOME/.zprofile
-        eval "$(/opt/homebrew/bin/brew shellenv)" >> $HOME/.zprofile
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-        source $HOME/.zprofile
-    else
-        echo "- Homebrew is already installed."
-    fi
+    echo "Updating brew"
     brew update && brew upgrade && brew cleanup
-    brew install tree sshs tldr ripgrep mysql
+    brew install tree sshs tldr ripgrep fd btop
 
     echo "Checking for JetBrains font"
     if ls $HOME/Library/Fonts | grep -q JetBrainsMonoNLNerdFont; then
@@ -69,21 +54,6 @@ if [[ $1 = "Darwin" ]]; then
         brew install --cask ghostty
     else
         echo "- Ghostty is already installed."
-    fi
-
-    echo "Cheking htop"
-    if ! command -v htop &>/dev/null; then
-        echo "- Htop is not installed. Installing Htop"
-        brew install ncurses automake autoconf gcc
-        current_folder = $(pwd)
-        git clone git@github.com:KoffeinFlummi/htop-vim.git $HOME/.local/htop
-        cd $HOME/.local/htop
-        ./autogen.sh 
-        ./configure --prefix=$HOME/.local/htop
-        make install
-        cd $current_folder
-    else
-        echo "- Htop is already installed."
     fi
 
 elif [[ $1 == "Linux" ]]; then

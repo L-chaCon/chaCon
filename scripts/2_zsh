@@ -1,9 +1,9 @@
 #!/bin/bash
-# $1 -> This is the "os" variable ("Darwin": iOS, )
-# $2 -> This is the "container" variable ("0": false, "1": true)
+OS=$1
+CONTAINER=$2
 
 # NOTE: iOS
-if [[ $1 == "Darwin" ]]; then
+if [[ $OS == "Darwin" ]]; then
     echo "Checking ZSH"
     if ! command -v zsh &>/dev/null; then
         echo "- ZSH is not installed. Installing ZSH..."
@@ -17,7 +17,7 @@ if [[ $1 == "Darwin" ]]; then
 
 
 # NOTE: Ubuntu
-elif [[ $1 == "Linux" ]]; then
+elif [[ $OS == "Linux" ]]; then
     echo "Checking ZSH"
     if ! command -v zsh &>/dev/null; then
         echo "- ZSH is not installed. Installing ZSH..."

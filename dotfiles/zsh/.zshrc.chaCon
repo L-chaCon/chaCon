@@ -19,9 +19,10 @@ elif [[ $(uname) == "Linux" ]]; then
 fi
 
 
-#ALIAS
+# -------- ALIAS
 alias rm="rm -iv"
 #help
+alias manual="tldr"
 alias bathelp="$BAT --plain --language=help"
 help() {
     "$@" --help 2>&1 | bathelp
