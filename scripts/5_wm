@@ -1,5 +1,23 @@
-brew install --cask font-jetbrains-mono
-brew install --cask sf-symbols
+#!/bin/bash
+OS=$1
+CONTAINER=$2
 
-# AEROSPACE
-defaults write com.apple.spaces spans-displays -bool true && killall SystemUIServer
+# NOTE: iOS
+if [[ $OS = "Darwin" ]]; then
+  if ! command -v sketchybar &>/dev/null;then
+    echo "- Sketchybar is not installed. Installing Sketchybar..."
+    brew tap FelixKratz/formulae
+    brew install sketchybar
+    brew install --cask sf-symbols
+  else
+    echo "- Sketchybar is already installed."
+  fi
+
+  if ! command -v aerospace &>/dev/null;then
+    echo "- Aerospace is not installed. Installing Aerospace..."
+    brew install --cask nikitabobko/tap/aerospace
+    defaults write com.apple.spaces spans-displays -bool true && killall SystemUIServer
+  else
+    echo "- Aerospace is already installed."
+  fi
+fi
