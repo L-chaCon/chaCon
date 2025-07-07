@@ -3,7 +3,7 @@
 # $2 -> This is the "container" variable ("0": false, "1": true)
 IOS=$1
 CONTAINER=$2
-PERSONAL=0  #falso
+PERSONAL=1  #falso
 
 echo "Creating base folders"
 mkdir -p $HOME/workspace $HOME/github.com/chaCon
