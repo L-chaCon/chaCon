@@ -4,8 +4,8 @@ ZSH_THEME=""
 CASE_SENSITIVE="true"
 
 #chaCon
-bindkey -s "^o" 'source ~/.local/scripts/tmux-sessionizer\n'
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf poetry)
+bindkey -s "^o" '~/.local/scripts/tmux-sessionizer\n'
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf poetry tmux)
 source $ZSH/oh-my-zsh.sh
 set -o vi
 export LANG=en_GB.UTF-8

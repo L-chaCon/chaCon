@@ -1,4 +1,4 @@
-[manager]
+[mgr]
 cwd = { fg = "black", bg = "white" }
 hovered         = { reversed = true }
 preview_hovered = { underline = true }

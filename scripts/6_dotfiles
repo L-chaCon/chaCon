@@ -1,9 +1,6 @@
 #!/bin/bash
 OS=$1
-CONTAINER=$2
 
-
-# NOTE: iOS
 if [[ $OS = "Darwin" ]]; then
     if ! command -v stow &>/dev/null;then
         echo "- Stow is not installed. Installing Stow..."
@@ -12,7 +9,6 @@ if [[ $OS = "Darwin" ]]; then
         echo "- Stow is already installed."
     fi
 
-# NOTE: Ubuntu
 elif [[ $OS == "Linux" ]]; then
     if ! command -v stow &>/dev/null;then
         echo "- Stow is not installed. Installing Stow..."
@@ -20,10 +16,10 @@ elif [[ $OS == "Linux" ]]; then
     else
         echo "- Stow is already installed."
     fi
-
+fi
 
 current_folder=$(pwd)
-echo 'source $HOME/.zshrc.chaCon' < $HOME/.zshrc
+echo 'source $HOME/.zshrc.chaCon' > $HOME/.zshrc
 
 echo "Creating links to dotfiles"
 cd dotfiles

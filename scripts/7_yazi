@@ -1,0 +1,11 @@
+#!/bin/bash
+OS=$1
+
+if [[ $OS = "Darwin" ]]; then
+    if ! command -v yazi &>/dev/null;then
+        echo "- Yazi is not installed. Installing Yazi..."
+        brew install yazi ffmpeg sevenzip jq poppler fd ripgrep fzf zoxide resvg imagemagick font-symbols-only-nerd-font
+    else
+        echo "- Yazi is already installed."
+    fi
+fi

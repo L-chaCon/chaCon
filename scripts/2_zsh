@@ -1,8 +1,6 @@
 #!/bin/bash
 OS=$1
-CONTAINER=$2
 
-# NOTE: iOS
 if [[ $OS == "Darwin" ]]; then
     echo "Checking ZSH"
     if ! command -v zsh &>/dev/null; then
@@ -13,10 +11,9 @@ if [[ $OS == "Darwin" ]]; then
     fi
     
     echo "Installing command line tools"
-    brew install fzf fd bat git-delta lsd starship
+    brew install fzf fd bat git-delta lsd starship zoxide pyenv pyenv-virtualenv
 
 
-# NOTE: Ubuntu
 elif [[ $OS == "Linux" ]]; then
     echo "Checking ZSH"
     if ! command -v zsh &>/dev/null; then
