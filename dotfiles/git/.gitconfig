@@ -5,7 +5,7 @@
     name = Octavio Montt
     username = L-chaCon
     email = montt.octavio@gmail.com 
-    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID/vG4bycuhGG0RJF0Gthq0NOmEKBplPundgB4uE+8Lj
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDyvs6fmn6URtZGm67vZKtvcO1B7V8VqT1ooqq7NJvqR
 
 [gpg]
     format = ssh
@@ -22,7 +22,7 @@
 [core]
     pager = delta
     sshCommand = "ssh -i ~/.ssh/chacon"
-    excludesFile = "~/.gitignore.chaCon"
+    excludesFile = "~/.gitignore"
 
 [interactive]
     diffFilter = delta --color-only
@@ -41,3 +41,6 @@
 
 [mergetool "nvim"]
 	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
+
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
