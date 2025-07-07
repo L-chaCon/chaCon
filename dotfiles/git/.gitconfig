@@ -22,7 +22,7 @@
 [core]
     pager = delta
     sshCommand = "ssh -i ~/.ssh/chacon"
-    excludesFile = "~/.gitignore.chaCon"
+    excludesFile = "~/.gitignore"
 
 [interactive]
     diffFilter = delta --color-only
