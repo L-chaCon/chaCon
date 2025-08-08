@@ -1,0 +1,17 @@
+# vim: ft=zsh
+
+function kfc() {
+    RED='\033[0;31m'
+    GREEN='\033[0;32m'
+    NC='\033[0m' # No Color
+    ctx=$(kafkactl config current-context)
+    ctx_lowercase=$(echo $ctx | tr '[:upper:]' '[:lower:]')
+    if [[ $ctx_lowercase == *"prod"* ]] && [[ $1 != "config" ]]; then
+        echo "Current kafka context: ${RED}$ctx${NC}"
+        read -s -k "?Press [return] to run command, [ctrl+c] to exit"
+    else
+        echo "Current kafka context: ${GREEN}$ctx${NC}"
+    fi
+    echo "\n> kafkactl $@"
+    kafkactl $@
+}

@@ -4,8 +4,14 @@ ZSH_THEME=""
 CASE_SENSITIVE="true"
 
 #chaCon
-bindkey -s "^o" '~/.local/scripts/tmux-sessionizer\n'
+tmux_sessionizer_widget() {
+  ~/.local/scripts/tmux-sessionizer
+  zle reset-prompt
+}
+zle -N tmux_sessionizer_widget
+bindkey '^o' tmux_sessionizer_widget
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf poetry tmux)
+
 source $ZSH/oh-my-zsh.sh
 set -o vi
 export LANG=en_GB.UTF-8
@@ -106,9 +112,8 @@ eval "$(zoxide init zsh --cmd cd)"
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(command $BAT -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
 }
 

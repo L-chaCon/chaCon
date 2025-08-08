@@ -1,0 +1,12 @@
+# vim: ft=zsh
+
+alias k="kube"
+
+function k8h () {
+	if [ -z "$1" ]
+	then
+		echo "Usage: k8h DEPLOYMENT_NAME"
+	else
+		kubectl rollout history $1 -o yaml | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} -E 'revision|image:'
+	fi
+}
