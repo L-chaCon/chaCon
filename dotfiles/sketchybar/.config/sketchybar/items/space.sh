@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SPACE_ICONS=("" "󰖟" "" "󱁐" "0" "1" "2")
+SPACE_ICONS=("" "󰖟" "" "󰩃" "0" "1" "2" "")
 for i in "${!SPACE_ICONS[@]}"; do
   sid="$(($i + 1))"
   space=(
