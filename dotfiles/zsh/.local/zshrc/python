@@ -1,4 +1,4 @@
-#!/bin/bash
+# vim: ft=zsh
 
 #pyenv
 alias pvc="pyenv virtualenv"
@@ -12,8 +12,8 @@ eval "$(pyenv init - zsh)"
 eval "$(pyenv virtualenv-init -)"
 
 # poetry
-poetry-export () {
-  poetry export --without-urls --without-hashes --only debug >> requirements-debug.txt
-  poetry export --without-urls --without-hashes >> requirements.txt
+poetry-export() {
+  poetry export --without-urls --without-hashes --only debug >>requirements-debug.txt
+  poetry export --without-urls --without-hashes >>requirements.txt
 }
 export POETRY_CONFIG_DIR="$HOME/.config/pypoetry"

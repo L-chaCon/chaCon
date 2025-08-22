@@ -1,0 +1,59 @@
+# vim: ft=zsh
+
+# -- Oh My Zsh
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME=""
+CASE_SENSITIVE="true"
+
+#chaCon
+tmux_sessionizer_widget() {
+  ~/.local/scripts/tmux-sessionizer
+  zle reset-prompt
+}
+zle -N tmux_sessionizer_widget
+bindkey '^o' tmux_sessionizer_widget
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf tmux)
+
+source $ZSH/oh-my-zsh.sh
+set -o vi
+export LANG=en_GB.UTF-8
+export EDITOR="nvim"
+if [[ $(uname) == "Darwin" ]]; then
+  BAT="bat"
+elif [[ $(uname) == "Linux" ]]; then
+  BAT="batcat"
+  alias bat="batcat"
+fi
+
+#ghostty
+if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
+  source "$GHOSTTY_RESOURCES_DIR"/shell-integration/zsh/ghostty-integration
+fi
+
+# -------- ALIAS
+alias rm="rm -iv"
+alias manual="tldr"
+alias bathelp="$BAT --plain --language=help"
+help() {
+    "$@" --help 2>&1 | bathelp
+}
+alias -g -- --help="--help 2>&1 | bathelp"
+
+#PATHS
+export PATH="$PATH:$HOME/.local/nvim/bin"               #nvim
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"  #mysql
+export PATH="$HOME/go/bin:$PATH"                        #go
+
+#man
+export MANPATH="/usr/local/man:$MANPATH"
+export MANPAGER="sh -c 'col -bx | $BAT -l man -p'"
+export MANROFFOPT="-c"
+
+#zoxide
+eval "$(zoxide init zsh --cmd cd)"
+
+#starship
+eval "$(starship init zsh)"
+# Generated for envman. Do not edit. Esto se instalo con github, es para 
+# instalar programs desde scripts
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"

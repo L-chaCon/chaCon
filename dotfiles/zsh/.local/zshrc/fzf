@@ -1,0 +1,45 @@
+# vim: ft=zsh
+
+alias fzf="fzf --preview '$BAT --color=always --style=numbers --line-range=:500 {}'"
+
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --zsh)"
+# -- Use fd instead of find --
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+_fzf_compgen_path() {
+  fd --hidden --exclude .git . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type=d --hidden --exclude .git . "$1"
+}
+bindkey -r "^G"
+
+# fzf git (ctrl+g+...)
+source ~/.fzf-git.sh/fzf-git.sh
+
+# Redefine this function to change the options
+_fzf_git_fzf() {
+  fzf --height=50% --tmux 90%,70% \
+    --layout=reverse --multi --min-height=20 --border \
+    --border-label-pos=2 \
+    --color='bg:#000000,bg+:#0e0e0e,fg:#f2f4f8,header:#3DDBD9:italic:underline,info:#25be6a,query:#f2f4f8' \
+    --preview-window='right,50%,border-left' \
+    --bind='ctrl-/:change-preview-window(down,50%,border-top|hidden|)' "$@"
+}
+
+export FZF_CTRL_T_OPTS="--preview '$BAT -n --color=always --line-range :500 {}'"
+
+_fzf_comprun() {
+  local command=$1
+  shift
+  case "$command" in
+    cd)           fzf --preview 'lsd --tree {} | head -200' "$@" ;;
+    export|unset) fzf --preview "eval 'echo $'{}"         "$@" ;;
+    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    *)            fzf --preview "$BAT -n --color=always --line-range :500 {}" "$@" ;;
+  esac
+}

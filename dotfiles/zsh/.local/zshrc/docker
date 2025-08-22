@@ -1,3 +1,10 @@
 # vim: ft=zsh
 
 alias docker-prune="docker ps -a | grep Exit | cut -d ' ' -f 1 | xargs docker rm"
+
+#docker
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/octaviomontt/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
