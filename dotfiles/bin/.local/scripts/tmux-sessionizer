@@ -47,15 +47,7 @@ fi
 # TODO: MEJORAR DE AQUI PARA ABAJO
 selected_name=$(basename "$selected" | tr . _)
 if ! tmux has-session -t="$selected_name" 2>/dev/null; then
-  echo $selected_name
-  tmux new-session -ds "$selected_name" -c "$selected" "yazi"
-  tmux neww -d -t "$selected_name:1" -c "$selected" "nvim"
-  tmux neww -d -t "$selected_name:2" -c "$selected"
-  tmux select-window -t "${selected_name}:2"
-fi
-
-if ! tmux has-session -t="$selected_name" 2>/dev/null; then
-  tmux new-session -ds "$selected_name" -c "$selected" "zsh -c 'yazi; exec zsh'"
+  tmux new-session -ds "$selected_name" -c "$selected"
   tmux neww -d -t "$selected_name:1" -c "$selected" "zsh -c 'nvim; exec zsh'"
   tmux neww -d -t "$selected_name:2" -c "$selected" "zsh"
 fi
