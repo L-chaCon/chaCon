@@ -1,0 +1,4 @@
+# vim: ft=zsh
+
+export PATH="$PATH:$HOME/.zig/zls-macos-aarch64-0.15.0-dev.254+22fc237c"
+export PATH="$PATH:$HOME/.zig/zig-aarch64-macos-0.15.0-dev.905+edf785db0"
