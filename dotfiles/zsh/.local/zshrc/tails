@@ -17,7 +17,6 @@ tails-pip () {
 }
 
 poetry-tails() {
-  echo poetry config http-basic.tails "aws" $(cat .codeartifact-token)
   export POETRY_HTTP_BASIC_TAILS_USERNAME=aws
   export POETRY_HTTP_BASIC_TAILS_PASSWORD=$(cat .codeartifact-token)
   echo $POETRY_HTTP_BASIC_TAILS_USERNAME
