@@ -1,6 +1,8 @@
 # vim: ft=zsh
 
-alias k="kube"
+alias k="kubectl"
+alias kctx="k ctx"
+alias kns="k ns"
 
 function k8h () {
 	if [ -z "$1" ]
@@ -10,3 +12,5 @@ function k8h () {
 		kubectl rollout history $1 -o yaml | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} -E 'revision|image:'
 	fi
 }
+
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"

@@ -108,26 +108,30 @@ automatically-unhide-macos-hidden-apps = true
     alt-equal = 'resize smart +50'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
+    # Develop
     cmd-1 = 'workspace 1'
     cmd-2 = 'workspace 2'
     cmd-3 = 'workspace 3'
     cmd-4 = 'workspace 4'
+    cmd-e = 'workspace 5'
 
-    cmd-6 = 'workspace 5'
-    cmd-7 = 'workspace 6'
-    cmd-8 = 'workspace 7'
-    cmd-9 = 'workspace 8'
+    # Nav
+    cmd-u = 'workspace 6'
+    cmd-i = 'workspace 7'
+    cmd-o = 'workspace 8'
+    cmd-p = 'workspace 9'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
     alt-shift-2 = 'move-node-to-workspace 2'
     alt-shift-3 = 'move-node-to-workspace 3'
     alt-shift-4 = 'move-node-to-workspace 4'
+    alt-shift-e = 'move-node-to-workspace 5'
 
-    alt-shift-6 = 'move-node-to-workspace 5'
-    alt-shift-7 = 'move-node-to-workspace 6'
-    alt-shift-8 = 'move-node-to-workspace 7'
-    alt-shift-9 = 'move-node-to-workspace 8'
+    alt-shift-u = 'move-node-to-workspace 6'
+    alt-shift-i = 'move-node-to-workspace 7'
+    alt-shift-o = 'move-node-to-workspace 8'
+    alt-shift-p = 'move-node-to-workspace 9'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-shift-semicolon = 'mode service'
@@ -143,32 +147,53 @@ automatically-unhide-macos-hidden-apps = true
     # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
     #s = ['layout sticky tiling', 'mode main']
 
-    alt-shift-h = ['join-with left', 'mode main']
-    alt-shift-j = ['join-with down', 'mode main']
-    alt-shift-k = ['join-with up', 'mode main']
-    alt-shift-l = ['join-with right', 'mode main']
+    alt-h = ['join-with left', 'mode main']
+    alt-j = ['join-with down', 'mode main']
+    alt-k = ['join-with up', 'mode main']
+    alt-l = ['join-with right', 'mode main']
 
     down = 'volume down'
     up = 'volume up'
     shift-down = ['volume set 0', 'mode main']
 
 
+
+# --- DEV ---
+# Terminal
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
 run = "move-node-to-workspace 1"
 
+# Docs
 [[on-window-detected]]
-if.app-id = 'company.thebrowser.Browser'
+if.app-id = 'com.kapeli.dashdoc'
 run = "move-node-to-workspace 2"
 
-[[on-window-detected]]
-if.app-id = 'com.tinyspeck.slackmacgap'
-run = "move-node-to-workspace 3"
-
+# Debugg
 [[on-window-detected]]
 if.app-id = 'com.usebruno.app'
-run = "move-node-to-workspace 4"
+run = "move-node-to-workspace 3"
+[[on-window-detected]]
+if.app-id = 'com.jetbrains.CLion'
+run = "move-node-to-workspace 3"
 
+# Browser
+[[on-window-detected]]
+if.app-id = 'company.thebrowser.Browser'
+run = "move-node-to-workspace 5"
+
+# Pizarra
 [[on-window-detected]]
 if.app-id = 'com.chocoford.excalidraw'
+run = "move-node-to-workspace 4"
+
+# --- NAV ---
+# Message 
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = "move-node-to-workspace 9"
+
+# Finder
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
 run = "move-node-to-workspace 8"
