@@ -11,5 +11,4 @@ done
 for item in "${FOLDERS[@]}"; do
   echo "- stow $item -t $HOME"
   stow -D $item -t $HOME
-  stow $item -t $HOME
 done
