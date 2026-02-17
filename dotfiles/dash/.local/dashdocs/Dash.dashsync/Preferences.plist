@@ -225,6 +225,14 @@
 	<array>
 		<dict>
 			<key>path</key>
+			<string>file://~/Library/Application%20Support/Dash/DocSets/Python/Python%203.docset/Contents/Resources/Documents/doc/library/stdtypes.html#//apple_ref/Class/bytearray</string>
+			<key>platformImagePath</key>
+			<string>python</string>
+			<key>title</key>
+			<string>Built-in Types  ❯  bytearray</string>
+		</dict>
+		<dict>
+			<key>path</key>
 			<string>dash-apple-api://load?request_key=lc/documentation/appkit/nswindow#//dash_ref/Section/Configuring%2520the%2520Window%25E2%2580%2599s%2520Appearance/1</string>
 			<key>platformImagePath</key>
 			<string>apple</string>
@@ -273,6 +281,11 @@
 				<key>date</key>
 				<date>2025-10-15T11:12:50Z</date>
 			</dict>
+			<key>http://kapeli.com/feeds/Go.xml</key>
+			<dict>
+				<key>date</key>
+				<date>2025-12-08T10:57:44Z</date>
+			</dict>
 			<key>http://kapeli.com/feeds/HTTP.xml</key>
 			<dict>
 				<key>date</key>
@@ -283,10 +296,10 @@
 				<key>date</key>
 				<date>2025-10-15T11:12:56Z</date>
 			</dict>
-			<key>http://kapeli.com/feeds/Lua_5.4.xml</key>
+			<key>http://kapeli.com/feeds/Lua.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2025-10-15T11:15:54Z</date>
+				<date>2026-01-26T11:58:40Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/Man_Pages.xml</key>
 			<dict>
@@ -298,15 +311,20 @@
 				<key>date</key>
 				<date>2025-10-15T11:15:42Z</date>
 			</dict>
+			<key>http://kapeli.com/feeds/Pandas.xml</key>
+			<dict>
+				<key>date</key>
+				<date>2026-02-03T13:38:01Z</date>
+			</dict>
 			<key>http://kapeli.com/feeds/PostgreSQL.xml</key>
 			<dict>
 				<key>date</key>
 				<date>2025-10-15T11:15:27Z</date>
 			</dict>
-			<key>http://kapeli.com/feeds/Python_3.xml</key>
+			<key>http://kapeli.com/feeds/Python.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2025-10-15T11:12:48Z</date>
+				<date>2026-01-26T11:58:48Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/SQLAlchemy.xml</key>
 			<dict>
@@ -482,9 +500,22 @@
 				<string>~/Library/Application Support/Dash/DocSets/C/C.docset</string>
 				<string>~/Library/Application Support/Dash/DocSets/C++/C++.docset</string>
 				<string>~/Library/Application Support/Dash/DocSets/Apple_API_Reference/Apple_API_Reference.docset</string>
+				<string>~/Library/Application Support/Dash/DocSets/Lua/Lua.docset</string>
+				<string>~/Library/Application Support/Dash/DocSets/Python/Python 3.docset</string>
+				<string>~/Library/Application Support/Dash/DocSets/Pandas/Pandas.docset</string>
 			</array>
 			<key>name</key>
-			<string>chaCon</string>
+			<string>python</string>
+			<key>searchSnippets</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>docsets</key>
+			<array>
+				<string>~/Library/Application Support/Dash/DocSets/Go/Go.docset</string>
+			</array>
+			<key>name</key>
+			<string>go</string>
 			<key>searchSnippets</key>
 			<true/>
 		</dict>

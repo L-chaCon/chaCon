@@ -114,12 +114,13 @@ automatically-unhide-macos-hidden-apps = true
     cmd-3 = 'workspace 3'
     cmd-4 = 'workspace 4'
     cmd-e = 'workspace 5'
+    cmd-d = 'workspace 6'
 
     # Nav
-    cmd-u = 'workspace 6'
-    cmd-i = 'workspace 7'
-    cmd-o = 'workspace 8'
-    cmd-p = 'workspace 9'
+    cmd-u = 'workspace 7'
+    cmd-i = 'workspace 8'
+    cmd-o = 'workspace 9'
+    cmd-p = 'workspace 10'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
@@ -127,11 +128,12 @@ automatically-unhide-macos-hidden-apps = true
     alt-shift-3 = 'move-node-to-workspace 3'
     alt-shift-4 = 'move-node-to-workspace 4'
     alt-shift-e = 'move-node-to-workspace 5'
+    alt-shift-d = 'move-node-to-workspace 6'
 
-    alt-shift-u = 'move-node-to-workspace 6'
-    alt-shift-i = 'move-node-to-workspace 7'
-    alt-shift-o = 'move-node-to-workspace 8'
-    alt-shift-p = 'move-node-to-workspace 9'
+    alt-shift-u = 'move-node-to-workspace 7'
+    alt-shift-i = 'move-node-to-workspace 8'
+    alt-shift-o = 'move-node-to-workspace 9'
+    alt-shift-p = 'move-node-to-workspace 10'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-shift-semicolon = 'mode service'
@@ -164,10 +166,15 @@ automatically-unhide-macos-hidden-apps = true
 if.app-id = 'com.mitchellh.ghostty'
 run = "move-node-to-workspace 1"
 
+# DB GUI
+[[on-window-detected]]
+if.app-id = 'org.jkiss.dbeaver.core.product'
+run = "move-node-to-workspace 2"
+
 # Docs
 [[on-window-detected]]
 if.app-id = 'com.kapeli.dashdoc'
-run = "move-node-to-workspace 2"
+run = "move-node-to-workspace 6"
 
 # Debugg
 [[on-window-detected]]
@@ -191,9 +198,9 @@ run = "move-node-to-workspace 4"
 # Message 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = "move-node-to-workspace 9"
+run = "move-node-to-workspace 10"
 
 # Finder
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
-run = "move-node-to-workspace 8"
+run = "move-node-to-workspace 9"

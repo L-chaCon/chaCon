@@ -40,9 +40,10 @@ help() {
 alias -g -- --help="--help 2>&1 | bathelp"
 
 #PATHS
-export PATH="$PATH:$HOME/.local/nvim/bin"               #nvim
-export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"  #mysql
-export PATH="$HOME/go/bin:$PATH"                        #go
+export PATH="$PATH:$HOME/.local/nvim/bin"                 #nvim
+export PATH="$HOME/go/bin:$PATH"                          #go
+export PATH=$(brew --prefix)/bin:$PATH                    #brew
+export PATH=$(brew --prefix)/opt/mysql-client/bin:$PATH   #mysql
 
 #man
 export MANPATH="/usr/local/man:$MANPATH"
