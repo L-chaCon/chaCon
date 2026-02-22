@@ -9,7 +9,7 @@ for dir in */; do
 done
 
 for item in "${FOLDERS[@]}"; do
-  echo "- stow $item -t $HOME"
+  echo "- stow $item $HOME"
   stow -D $item -t $HOME
   stow $item -t $HOME
 done

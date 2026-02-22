@@ -1,6 +1,0 @@
-#!/bin/sh
-ITEMS_DIR="$CONFIG_DIR/items"
-PLUGINS_DIR="$CONFIG_DIR/plugins"
-BAR_HIGHT=38
-FONT="JetBrains Mono"
-FONT_SIZE=17.0
