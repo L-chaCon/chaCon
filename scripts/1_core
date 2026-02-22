@@ -3,60 +3,56 @@
 # $2 -> This is the "container" variable ("0": false, "1": true)
 IOS=$1
 CONTAINER=$2
-PERSONAL=1  #falso
+PERSONAL=1 #falso
 
 echo "Creating base folders"
 mkdir -p $HOME/workspace $HOME/github.com/chaCon
 
 echo "Cheking for ssh key"
 if ls $HOME/.ssh | grep -q "chacon"; then
-    echo "- SSH key found at: $HOME/.ssh/chacon"
-    echo "- Add the key to GitHub. Have you done it? (y/n)"
-    read answer
+  echo "- SSH key found at: $HOME/.ssh/chacon"
+  echo "- Add the key to GitHub. Have you done it? (y/n)"
+  read answer
 else
-    echo "- Creating SSH key ED25519"
-    ssh-keygen -t ed25519 -C "montt.octavio@gmail.com" -f $HOME/.ssh/chacon -N ""
-    echo "- Add the key to GitHub. Have you done it? (y/n)"
-    read answer
+  echo "- Creating SSH key ED25519"
+  ssh-keygen -t ed25519 -C "montt.octavio@gmail.com" -f $HOME/.ssh/chacon -N ""
+  echo "- Add the key to GitHub. Have you done it? (y/n)"
+  read answer
 fi
 echo "Cheking for git folders"
-if [[ ! -d "$HOME/workspace/notes" ]];then
-    git clone git@github.com:L-chaCon/notes.git $HOME/workspace/notes
+if [[ ! -d "$HOME/workspace/notes" ]]; then
+  git clone git@github.com:L-chaCon/notes.git $HOME/workspace/notes
 fi
-if [[ $PERSONAL != "0" ]];then
-  if [[ ! -d "$HOME/Documents/personal" ]];then
-      git clone git@github.com:L-chaCon/Documents.git $HOME/Documents/personal
-  fi
-  if [[ ! -d "$HOME/Pictures/personal" ]];then
-      # git clone git@github.com:L-chaCon/Images.git $HOME/Pictures/personal
+if [[ $PERSONAL != "0" ]]; then
+  if [[ ! -d "$HOME/Documents/personal" ]]; then
+    git clone git@github.com:L-chaCon/Documents.git $HOME/Documents/personal
   fi
 fi
-
 
 if [[ $1 = "Darwin" ]]; then
-    echo "Updating brew"
-    brew update && brew upgrade && brew cleanup
-    brew install tree sshs tldr ripgrep fd btop
+  echo "Updating brew"
+  brew update && brew upgrade && brew cleanup
+  brew install tree sshs tldr ripgrep fd btop
 
-    echo "Checking for JetBrains font"
-    if ls $HOME/Library/Fonts | grep -q JetBrainsMonoNLNerdFont; then
-        echo "- Installing JetBrais Nerd Font..."
-        brew install --cask font-jetbrains-mono-nerd-font
-    else
-        echo "- JetBrais Nerd Font already installed."
-    fi
+  echo "Checking for JetBrains font"
+  if ls $HOME/Library/Fonts | grep -q JetBrainsMonoNLNerdFont; then
+    echo "- Installing JetBrais Nerd Font..."
+    brew install --cask font-jetbrains-mono-nerd-font
+  else
+    echo "- JetBrais Nerd Font already installed."
+  fi
 
-    # TODO: HACER UN SCRIPT PARA USAR `tldr` funciona tldr -C (lo que busco) | bat
+  # TODO: HACER UN SCRIPT PARA USAR `tldr` funciona tldr -C (lo que busco) | bat
 
-    echo "Checking Ghostty"
-    if ! command -v ghostty &>/dev/null; then
-        echo "- Ghostty is not installed. Installing Ghostty..."
-        brew install --cask ghostty
-    else
-        echo "- Ghostty is already installed."
-    fi
+  echo "Checking Ghostty"
+  if ! command -v ghostty &>/dev/null; then
+    echo "- Ghostty is not installed. Installing Ghostty..."
+    brew install --cask ghostty
+  else
+    echo "- Ghostty is already installed."
+  fi
 
 elif [[ $1 == "Linux" ]]; then
-    sudo apt upgrade -y && sudo apt update -y
-    sudo apt install -y tree tldr ripgrep mysql-server cmake
+  sudo apt upgrade -y && sudo apt update -y
+  sudo apt install -y tree tldr ripgrep mysql-server cmake
 fi
