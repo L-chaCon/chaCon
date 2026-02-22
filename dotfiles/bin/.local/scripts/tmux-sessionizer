@@ -47,14 +47,13 @@ fi
 # TODO: MEJORAR DE AQUI PARA ABAJO
 selected_name=$(basename "$selected" | tr . _)
 if ! tmux has-session -t="$selected_name" 2>/dev/null; then
-  tmux new-session -ds "$selected_name" -c "$selected"
-  tmux neww -d -t "$selected_name:1" -c "$selected" "zsh -c 'nvim; exec zsh'"
-  tmux neww -d -t "$selected_name:2" -c "$selected" "zsh"
+  tmux new-session -ds "$selected_name" -c "$selected" "while true; do nvim; done"
+  tmux neww -d -t "$selected_name:1" -c "$selected" "zsh"
 fi
 
 # If inside tmux, switch client to session + window
 if [ -n "$TMUX" ]; then
-  tmux switch-client -t "$selected_name":2
+  tmux switch-client -t "$selected_name":1
 else
-  tmux attach-session -t "$selected_name" \; select-window -t "$selected_name":2
+  tmux attach-session -t "$selected_name" \; select-window -t "$selected_name":1
 fi
