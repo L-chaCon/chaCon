@@ -28,7 +28,7 @@ if [[ $PERSONAL != "0" ]];then
       git clone git@github.com:L-chaCon/Documents.git $HOME/Documents/personal
   fi
   if [[ ! -d "$HOME/Pictures/personal" ]];then
-      git clone git@github.com:L-chaCon/Images.git $HOME/Pictures/personal
+      # git clone git@github.com:L-chaCon/Images.git $HOME/Pictures/personal
   fi
 fi
 
