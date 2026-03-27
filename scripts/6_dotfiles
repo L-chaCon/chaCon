@@ -1,4 +1,6 @@
 #!/bin/bash
+set -euo pipefail
+trap 'echo "  ✗ Error in $(basename "$0") at line $LINENO" >&2' ERR
 
 if ! command -v stow &>/dev/null; then
   echo "- Stow is not installed. Installing Stow..."
@@ -9,10 +11,8 @@ fi
 
 current_folder=$(pwd)
 cat <<'EOF' >"$HOME/.zshrc"
-#!/bin/bash
-
 # ==========================================
-# Script Name: pow
+# Script Name: .zshrc
 # Description: This file was automatically created
 # Author: chaCon
 # ==========================================
