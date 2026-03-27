@@ -161,36 +161,41 @@ run = "move-node-to-workspace 1"
 if.app-id = 'org.jkiss.dbeaver.core.product'
 run = "move-node-to-workspace 2"
 
-# Docs
-[[on-window-detected]]
-if.app-id = 'com.kapeli.dashdoc'
-run = "move-node-to-workspace 6"
-
 # Debugg
 [[on-window-detected]]
 if.app-id = 'com.usebruno.app'
 run = "move-node-to-workspace 3"
-[[on-window-detected]]
-if.app-id = 'com.jetbrains.CLion'
-run = "move-node-to-workspace 3"
-
-# Browser
-[[on-window-detected]]
-if.app-id = 'company.thebrowser.Browser'
-run = "move-node-to-workspace 5"
 
 # Pizarra
 [[on-window-detected]]
 if.app-id = 'com.chocoford.excalidraw'
 run = "move-node-to-workspace 4"
 
-# --- NAV ---
-# Message 
+# Browser
 [[on-window-detected]]
-if.app-id = 'com.tinyspeck.slackmacgap'
-run = "move-node-to-workspace 10"
+if.app-id = 'company.thebrowser.Browser'
+run = "move-node-to-workspace 5"
 
+# Docs
+[[on-window-detected]]
+if.app-id = 'com.kapeli.dashdoc'
+run = "move-node-to-workspace 6"
+
+# AI
+[[on-window-detected]]
+if.app-id = 'ai.opencode.desktop'
+run = "move-node-to-workspace 8"
+
+# --- NAV ---
 # Finder
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
 run = "move-node-to-workspace 9"
+
+# Message 
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = "move-node-to-workspace 10"
+[[on-window-detected]]
+if.app-id = 'net.whatsapp.WhatsApp'
+run = "move-node-to-workspace 10"
