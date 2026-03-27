@@ -1,7 +1,6 @@
-# Cosas para hacer
+## Scripts pendientes
 
-- [ ] hacer sketchybar como me gusta
-  - [ ] modulo CPU quieres RAM y mas weas
-  - [X] Hacer funcionar el aerospace
-- [X] estudiar aerospace
-- [ ] Arreglar el sessonizer
+- [ ] Add install script for jj
+- [ ] Add install script for Go
+- [ ] Add install script for Zig
+- [ ] Add install script for Docker

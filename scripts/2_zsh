@@ -1,37 +1,15 @@
 #!/bin/bash
-OS=$1
 
-if [[ $OS == "Darwin" ]]; then
-  echo "Checking ZSH"
-  if ! command -v zsh &>/dev/null; then
-    echo "- ZSH is not installed. Installing ZSH..."
-    brew install zsh
-  else
-    echo "- ZSH is already installed."
-  fi
-
-  echo "Installing command line tools"
-  brew install fzf fd bat git-delta lsd starship zoxide pyenv pyenv-virtualenv
-
-elif [[ $OS == "Linux" ]]; then
-  echo "Checking ZSH"
-  if ! command -v zsh &>/dev/null; then
-    echo "- ZSH is not installed. Installing ZSH..."
-    sudo apt install zsh
-  else
-    echo "- ZSH is already installed."
-  fi
-
-  echo "Installing Cargo..."
-  curl https://sh.rustup.rs -sSf | sh -s -- -yq
-  . "$HOME/.cargo/env"
-
-  echo "Installing command line tools..."
-  sudo apt install -y fzf fd-find bat zoxide
-  cargo install lsd
-  cargo install starship --locked
-  curl -fsSL https://pyenv.run | bash
+echo "Checking ZSH"
+if ! command -v zsh &>/dev/null; then
+  echo "- ZSH is not installed. Installing ZSH..."
+  brew install zsh
+else
+  echo "- ZSH is already installed."
 fi
+
+echo "Installing command line tools"
+brew install fzf fd bat git-delta lsd starship zoxide pyenv pyenv-virtualenv
 
 echo "Checking Oh My Zsh"
 if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
@@ -57,7 +35,7 @@ else
   echo "- Syntax Highlighting is already installed."
 fi
 
-echo "Cheking Git fzf"
+echo "Checking Git fzf"
 if [[ ! -d "$HOME/.fzf-git.sh" ]]; then
   echo "- Git fzf is not installed. Installing Git fzf..."
   git clone https://github.com/junegunn/fzf-git.sh.git $HOME/.fzf-git.sh
