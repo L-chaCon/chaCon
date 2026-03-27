@@ -1,4 +1,6 @@
 #!/bin/bash
+set -euo pipefail
+trap 'echo "  ✗ Error in $(basename "$0") at line $LINENO" >&2' ERR
 
 echo "Checking ZSH"
 if ! command -v zsh &>/dev/null; then

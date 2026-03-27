@@ -1,4 +1,6 @@
 #!/bin/bash
+set -euo pipefail
+trap 'echo "  ✗ Error in $(basename "$0") at line $LINENO" >&2' ERR
 
 if ! command -v aerospace &>/dev/null; then
   echo "- Aerospace is not installed. Installing Aerospace..."

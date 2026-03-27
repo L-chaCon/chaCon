@@ -1,0 +1,98 @@
+#!/bin/bash
+# verify — checks that all tools and dotfiles are properly set up after ./pow
+
+pass=0
+fail=0
+
+ok()   { echo "  ✓ $1"; ((pass++)); }
+fail() { echo "  ✗ $1"; ((fail++)); }
+
+check_cmd() {
+  local name="$1"
+  if command -v "$name" &>/dev/null; then
+    ok "$name"
+  else
+    fail "$name (not found in PATH)"
+  fi
+}
+
+check_dir() {
+  local path="$1" label="${2:-$1}"
+  if [[ -d "$path" ]]; then
+    ok "$label"
+  else
+    fail "$label (not found: $path)"
+  fi
+}
+
+check_link() {
+  local path="$1" label="${2:-$1}"
+  if [[ -L "$path" ]]; then
+    ok "$label"
+  else
+    fail "$label (not a symlink: $path)"
+  fi
+}
+
+# ---- 1_core ----
+echo "Core tools"
+check_cmd tree
+check_cmd sshs
+check_cmd tldr
+check_cmd rg
+check_cmd btop
+check_cmd ghostty
+
+# ---- 2_zsh ----
+echo ""
+echo "Zsh & shell tools"
+check_cmd zsh
+check_cmd fzf
+check_cmd fd
+check_cmd bat
+check_cmd delta
+check_cmd lsd
+check_cmd starship
+check_cmd zoxide
+check_cmd pyenv
+check_dir "$HOME/.oh-my-zsh"                                               "oh-my-zsh"
+check_dir "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"            "zsh-autosuggestions"
+check_dir "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"        "zsh-syntax-highlighting"
+check_dir "$HOME/.fzf-git.sh"                                              "fzf-git.sh"
+
+# ---- 3_tmux ----
+echo ""
+echo "Tmux"
+check_cmd tmux
+check_cmd gitmux
+check_dir "$HOME/.config/tmux/plugins/catppuccin" "catppuccin theme"
+
+# ---- 4_nvim ----
+echo ""
+echo "Neovim"
+check_cmd nvim
+check_dir "$HOME/.config/nvim" "nvim config"
+
+# ---- 5_aerospace ----
+echo ""
+echo "Window manager"
+check_cmd aerospace
+
+# ---- dotfiles (symlinks) ----
+echo ""
+echo "Dotfiles"
+check_link "$HOME/.chaCon"                              ".chaCon"
+check_link "$HOME/.tmux.conf"                           ".tmux.conf"
+check_link "$HOME/.gitmux.conf"                         ".gitmux.conf"
+check_link "$HOME/.gitconfig"                           ".gitconfig"
+check_link "$HOME/.config/ghostty/config"               "ghostty/config"
+check_link "$HOME/.config/bat/config"                   "bat/config"
+check_link "$HOME/.config/btop/btop.conf"               "btop.conf"
+check_link "$HOME/.config/starship.toml"                "starship.toml"
+check_link "$HOME/.config/aerospace/aerospace.toml"     "aerospace.toml"
+check_link "$HOME/.local/scripts/tmux-sessionizer"      "tmux-sessionizer"
+
+# ---- summary ----
+echo ""
+echo "=== ${pass} passed, ${fail} failed ==="
+[[ $fail -eq 0 ]] && exit 0 || exit 1

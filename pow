@@ -1,18 +1,96 @@
 #!/bin/bash
-script_dir="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
+set -uo pipefail
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$script_dir"
 
-cd $script_dir
-scripts="$(find scripts -mindepth 1 -maxdepth 1 -type f | sort)"
+# ---- helpers ----
+
+all_scripts() {
+  find scripts -mindepth 1 -maxdepth 1 -type f | sort
+}
+
+print_usage() {
+  echo "Usage: ./pow [--help] [--list] [script_name]"
+  echo ""
+  echo "Options:"
+  echo "  --help          Show this help"
+  echo "  --list          List all available scripts"
+  echo "  script_name     Run a single script by name or partial match"
+  echo "                  e.g. ./pow 3_tmux  or  ./pow tmux"
+  echo ""
+  echo "Without arguments, runs all scripts in order."
+}
+
+# ---- args ----
+
+if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+  print_usage
+  exit 0
+fi
+
+if [[ "${1:-}" == "--list" ]]; then
+  echo "Available scripts:"
+  for s in $(all_scripts); do
+    echo "  $(basename "$s")"
+  done
+  exit 0
+fi
+
+# ---- single script mode ----
+
+if [[ $# -gt 0 ]]; then
+  target="scripts/$1"
+  if [[ ! -f "$target" ]]; then
+    match=$(find scripts -mindepth 1 -maxdepth 1 -type f -name "*${1}*" | sort | head -1)
+    if [[ -z "$match" ]]; then
+      echo "Error: no script matching '$1'" >&2
+      echo "Run ./pow --list to see available scripts." >&2
+      exit 1
+    fi
+    target="$match"
+  fi
+  echo "*-*   *-*   *POW!*   *-*   *-*"
+  echo "running script: $(basename "$target")"
+  echo " ---   ---   ---   ---   ---   ---"
+  ./"$target"
+  exit $?
+fi
+
+# ---- full run ----
 
 echo "*-*   *-*   *POW!*   *-*   *-*"
 actions=("BANG!" "ZAP!" "CRASH!" "POOF!" "BAM!")
 length=${#actions[@]}
 
+passed=()
+failed=()
 count=0
-for script in $scripts; do
+
+for script in $(all_scripts); do
+  echo ""
   echo "   *   ${actions[$((count % length))]}   *   "
-  echo "running script: $script"
-  ./$script
-  ((count++))
+  echo "running script: $(basename "$script")"
   echo " ---   ---   ---   ---   ---   ---"
+  if ./"$script"; then
+    passed+=("$(basename "$script")")
+  else
+    failed+=("$(basename "$script")")
+  fi
+  ((count++))
 done
+
+# ---- summary ----
+
+echo ""
+echo "=== Summary ==="
+for s in "${passed[@]+"${passed[@]}"}"; do
+  echo "  ✓ $s"
+done
+for s in "${failed[@]+"${failed[@]}"}"; do
+  echo "  ✗ $s"
+done
+echo ""
+
+if [[ ${#failed[@]} -gt 0 ]]; then
+  exit 1
+fi
