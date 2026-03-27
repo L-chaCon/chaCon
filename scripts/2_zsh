@@ -2,66 +2,65 @@
 OS=$1
 
 if [[ $OS == "Darwin" ]]; then
-    echo "Checking ZSH"
-    if ! command -v zsh &>/dev/null; then
-        echo "- ZSH is not installed. Installing ZSH..."
-        brew install zsh
-    else
-        echo "- ZSH is already installed."
-    fi
-    
-    echo "Installing command line tools"
-    brew install fzf fd bat git-delta lsd starship zoxide pyenv pyenv-virtualenv
+  echo "Checking ZSH"
+  if ! command -v zsh &>/dev/null; then
+    echo "- ZSH is not installed. Installing ZSH..."
+    brew install zsh
+  else
+    echo "- ZSH is already installed."
+  fi
 
+  echo "Installing command line tools"
+  brew install fzf fd bat git-delta lsd starship zoxide pyenv pyenv-virtualenv
 
 elif [[ $OS == "Linux" ]]; then
-    echo "Checking ZSH"
-    if ! command -v zsh &>/dev/null; then
-        echo "- ZSH is not installed. Installing ZSH..."
-        sudo apt install zsh
-    else
-        echo "- ZSH is already installed."
-    fi
+  echo "Checking ZSH"
+  if ! command -v zsh &>/dev/null; then
+    echo "- ZSH is not installed. Installing ZSH..."
+    sudo apt install zsh
+  else
+    echo "- ZSH is already installed."
+  fi
 
-    echo "Installing Cargo..."
-    curl https://sh.rustup.rs -sSf | sh -s -- -yq
-    . "$HOME/.cargo/env"
+  echo "Installing Cargo..."
+  curl https://sh.rustup.rs -sSf | sh -s -- -yq
+  . "$HOME/.cargo/env"
 
-    echo "Installing command line tools..."
-    sudo apt install -y fzf fd-find bat zoxide
-    cargo install lsd
-    cargo install starship --locked
-    curl -fsSL https://pyenv.run | bash
+  echo "Installing command line tools..."
+  sudo apt install -y fzf fd-find bat zoxide
+  cargo install lsd
+  cargo install starship --locked
+  curl -fsSL https://pyenv.run | bash
 fi
 
 echo "Checking Oh My Zsh"
 if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
-    echo "- Oh My Zsh is not installed. Installing Oh My Zsh..."
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  echo "- Oh My Zsh is not installed. Installing Oh My Zsh..."
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 else
-    echo "- Oh My Zsh is already installed."
+  echo "- Oh My Zsh is already installed."
 fi
 
 echo "Checking Zsh Auto Suggestions"
 if [[ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]]; then
-    echo "- Auto Suggestion is not installed. Installing Auto Suggestions..."
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  echo "- Auto Suggestion is not installed. Installing Auto Suggestions..."
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 else
-    echo "- Auto Suggestion is already installed."
+  echo "- Auto Suggestion is already installed."
 fi
 
 echo "Checking Zsh Syntax Highlighting"
 if [[ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]]; then
-    echo "- Syntax Highlighting is not installed. Installing Syntax Highlighting..."
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  echo "- Syntax Highlighting is not installed. Installing Syntax Highlighting..."
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 else
-    echo "- Syntax Highlighting is already installed."
+  echo "- Syntax Highlighting is already installed."
 fi
 
-echo  "Cheking Git fzf"
+echo "Cheking Git fzf"
 if [[ ! -d "$HOME/.fzf-git.sh" ]]; then
-    echo "- Git fzf is not installed. Installing Git fzf..."
-    git clone https://github.com/junegunn/fzf-git.sh.git $HOME/.fzf-git.sh
+  echo "- Git fzf is not installed. Installing Git fzf..."
+  git clone https://github.com/junegunn/fzf-git.sh.git $HOME/.fzf-git.sh
 else
-    echo "- Git fzf is already installed."
+  echo "- Git fzf is already installed."
 fi

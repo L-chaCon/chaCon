@@ -2,31 +2,44 @@
 OS=$1
 
 if [[ $OS = "Darwin" ]]; then
-    if ! command -v stow &>/dev/null;then
-        echo "- Stow is not installed. Installing Stow..."
-        brew install stow
-    else
-        echo "- Stow is already installed."
-    fi
+  if ! command -v stow &>/dev/null; then
+    echo "- Stow is not installed. Installing Stow..."
+    brew install stow
+  else
+    echo "- Stow is already installed."
+  fi
 
 elif [[ $OS == "Linux" ]]; then
-    if ! command -v stow &>/dev/null;then
-        echo "- Stow is not installed. Installing Stow..."
-        sudo apt install stow
-    else
-        echo "- Stow is already installed."
-    fi
+  if ! command -v stow &>/dev/null; then
+    echo "- Stow is not installed. Installing Stow..."
+    sudo apt install stow
+  else
+    echo "- Stow is already installed."
+  fi
 fi
 
 current_folder=$(pwd)
-echo 'source $HOME/.zshrc.chaCon' > $HOME/.zshrc
+cat <<'EOF' >"$HOME/.zshrc"
+#!/bin/bash
+
+# ==========================================
+# Script Name: pow
+# Description: This file was automaticlly created
+# Author: chaCon
+# ==========================================
+
+source $HOME/.chaCon
+source $HOME/.local/zshrc/personal
+source $HOME/.local/zshrc/fzf
+source $HOME/.local/zshrc/lsd
+EOF
 
 echo "Creating links to dotfiles"
 cd dotfiles
 ./install
 for item in "${STOW_FOLDERS[@]}"; do
-    echo "- stow $item -t $HOME"
-    stow -D $item -t $HOME
-    stow $item -t $HOME
+  echo "- stow $item -t $HOME"
+  stow -D $item -t $HOME
+  stow $item -t $HOME
 done
 cd $current_folder
