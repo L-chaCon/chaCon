@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Help funtionality
+# Help functionality
 if [[ $1 == "-h" || $1 == "--help" ]]; then
   cat <<EOF
 Sessionizer for tmux
@@ -44,7 +44,6 @@ if [[ -z $selected ]]; then
   exit 0
 fi
 
-# TODO: MEJORAR DE AQUI PARA ABAJO
 selected_name=$(basename "$selected" | tr . _)
 if ! tmux has-session -t="$selected_name" 2>/dev/null; then
   tmux new-session -ds "$selected_name" -c "$selected" "while true; do nvim; done"
