@@ -2,24 +2,33 @@
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": true,
   "permission": {
-    "edit": "ask",
-    "bash": {
-      "*": "ask",
+    "edit": {
+      "*": "allow",
       "git *": "allow",
       "git commit *": "deny",
       "git push *": "deny",
       "grep *": "allow"
+    },
+    "bash": {
+      "*": "allow",
+      "git*": "allow",
+      "git commit *": "deny",
+      "git push *": "deny",
+      "grep*": "allow",
+      "python3 -c*": "allow",
+      "ls*": "allow",
+      "docker*": "allow",
+      "find*": "allow",
+      "pyenv*": "allow"
     }
   },
   "agent": {
     "build": {
       "permission": {
         "bash": {
-          "*": "ask",
-          "git *": "allow",
+          "*": "allow",
           "git commit *": "deny",
           "git push *": "deny",
-          "grep *": "allow"
         }
       }
     }
