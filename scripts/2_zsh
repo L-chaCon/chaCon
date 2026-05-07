@@ -11,28 +11,21 @@ else
 fi
 
 echo "Installing command line tools"
-brew install fzf fd bat git-delta lsd starship zoxide pyenv pyenv-virtualenv
+brew install fzf fd bat git-delta lsd starship zoxide
 
-echo "Checking Oh My Zsh"
-if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
-  echo "- Oh My Zsh is not installed. Installing Oh My Zsh..."
-  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-else
-  echo "- Oh My Zsh is already installed."
-fi
-
+mkdir -p $HOME/.zsh
 echo "Checking Zsh Auto Suggestions"
-if [[ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]]; then
+if [[ ! -d "$HOME/.zsh/plugins/zsh-autosuggestions" ]]; then
   echo "- Auto Suggestion is not installed. Installing Auto Suggestions..."
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.zsh/plugins/zsh-autosuggestions
 else
   echo "- Auto Suggestion is already installed."
 fi
 
 echo "Checking Zsh Syntax Highlighting"
-if [[ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]]; then
+if [[ ! -d "$HOME/.zsh/plugins/zsh-syntax-highlighting" ]]; then
   echo "- Syntax Highlighting is not installed. Installing Syntax Highlighting..."
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.zsh/plugins/zsh-syntax-highlighting
 else
   echo "- Syntax Highlighting is already installed."
 fi

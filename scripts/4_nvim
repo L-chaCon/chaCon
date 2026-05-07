@@ -10,7 +10,7 @@ if [[ ! -d $HOME/.local/neovim ]]; then
   cd $HOME/.local/neovim
   git fetch
   xcode-select --install 2>/dev/null || true
-  brew install ninja cmake gettext curl luajit pyright
+  brew install ninja cmake gettext curl luajit pyright tree-sitter-cli
   rm -r build/
   make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local/nvim"
   sudo make install
