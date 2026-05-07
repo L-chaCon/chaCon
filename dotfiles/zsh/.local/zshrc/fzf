@@ -3,7 +3,8 @@
 alias fzf="fzf --preview '$BAT --color=always --style=numbers --line-range=:500 {}'"
 
 # Set up fzf key bindings and fuzzy completion
-eval "$(fzf --zsh)"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # -- Use fd instead of find --
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

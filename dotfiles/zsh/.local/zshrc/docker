@@ -1,6 +1,0 @@
-# vim: ft=zsh
-
-alias docker-prune="docker ps -a | grep Exit | cut -d ' ' -f 1 | xargs docker rm"
-fpath=($HOME/.docker/completions $fpath)
-autoload -Uz compinit
-compinit

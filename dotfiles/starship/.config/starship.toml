@@ -162,8 +162,6 @@ symbol = " "
 
 [python]
 symbol = " "
-pyenv_version_name= true
-format = 'via [${symbol}${version}]($style) '
 
 [rlang]
 symbol = "󰟔 "
