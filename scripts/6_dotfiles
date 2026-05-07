@@ -21,6 +21,9 @@ source $HOME/.chaCon
 source $HOME/.local/zshrc/personal
 source $HOME/.local/zshrc/fzf
 source $HOME/.local/zshrc/lsd
+source $HOME/.local/zshrc/brew
+source $HOME/.local/zshrc/zoxie
+source $HOME/.local/zshrc/opencode
 EOF
 
 echo "Creating links to dotfiles"
