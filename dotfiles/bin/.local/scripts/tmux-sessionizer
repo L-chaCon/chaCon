@@ -23,12 +23,12 @@ EOF
 fi
 
 # Set search paths
-DEFAULT_FOLDERS="$HOME/workspace:$HOME/.config:$HOME/github.com/chaCon"
-if [[ -n $FZF_SEARCH_FOLDERS ]]; then
-  FOLDERS="$DEFAULT_FOLDERS:$FZF_SEARCH_FOLDERS"
-else
-  FOLDERS="$DEFAULT_FOLDERS"
-fi
+DEFAULT_FOLDERS="$HOME/workspace:$HOME/.config:$HOME/github.com/chaCon:$HOME/github.com/tails.com"
+# if [[ -n $FZF_SEARCH_FOLDERS ]]; then
+#   FOLDERS="$DEFAULT_FOLDERS:$FZF_SEARCH_FOLDERS"
+# else
+FOLDERS="$DEFAULT_FOLDERS"
+# fi
 search_paths=$(echo "$FOLDERS" | tr ":" " ")
 
 # Get the folder path, can be pass as first parameter or
