@@ -4,6 +4,9 @@
 source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# -- Make sure .config is the config home
+export XDG_CONFIG_HOME=$HOME/.config
+
 # -- tmux sessionizer
 tmux_sessionizer_widget() {
   ~/.local/scripts/tmux-sessionizer
