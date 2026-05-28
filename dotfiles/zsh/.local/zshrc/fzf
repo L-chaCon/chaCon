@@ -27,7 +27,7 @@ _fzf_git_fzf() {
   fzf --height=50% --tmux 90%,70% \
     --layout=reverse --multi --min-height=20 --border \
     --border-label-pos=2 \
-    --color='bg:#000000,bg+:#0e0e0e,fg:#f2f4f8,header:#3DDBD9:italic:underline,info:#25be6a,query:#f2f4f8' \
+    --color='bg:black,bg+:black,fg:white,header:cyan:italic:underline,info:green,query:white' \
     --preview-window='right,50%,border-left' \
     --bind='ctrl-/:change-preview-window(down,50%,border-top|hidden|)' "$@"
 }
