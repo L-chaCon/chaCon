@@ -1,11 +1,5 @@
 # vim: ft=zsh
 
-if [[ -n $FZF_SEARCH_FOLDERS ]]; then
-  export FZF_SEARCH_FOLDERS="$FZF_SEARCH_FOLDERS:$HOME/github.com/tails.com"
-else
-  export FZF_SEARCH_FOLDERS="$HOME/github.com/tails.com"
-fi
-
 alias aws-login="aws sso login --sso-session tails && aws-docker-login"
 alias aws-docker-login="aws ecr get-login-password --region eu-west-1 --profile=production | docker login --username AWS --password-stdin 426105708615.dkr.ecr.eu-west-1.amazonaws.com"
 
@@ -22,7 +16,14 @@ tails-pip () {
     printf "$(cat $VENV/pip.conf)\n"
 }
 
-poetry-tails() {
+tails-uv () {
+    CA_TOKEN=$(aws codeartifact get-authorization-token --profile production --domain tails --domain-owner 426105708615 --query authorizationToken --output text)
+    INDEX_URL="https://aws:$CA_TOKEN@tails-426105708615.d.codeartifact.eu-west-1.amazonaws.com/pypi/tails/simple/"
+    export UV_INDEX_URL=$INDEX_URL
+    echo $UV_INDEX_URL
+}
+
+tails-poetry () {
   export POETRY_HTTP_BASIC_TAILS_USERNAME=aws
   export POETRY_HTTP_BASIC_TAILS_PASSWORD=$(cat .codeartifact-token)
   echo $POETRY_HTTP_BASIC_TAILS_USERNAME
@@ -61,7 +62,7 @@ cs-stop() {
  docker container stop $(docker container ls -q)
 }
 
-idy-up() {
+tidy-up() {
   cs-stop 
   docker system prune -f
 }
@@ -103,72 +104,110 @@ develop-adamm() {
 }
 
 develop-packing() {
-  set-title "develop-packing"
   create-tails-network
 
-  tmux new-session -d -s packing
+  WINDOW=$(tmux display-message -p '#S'):$(tmux display-message -p '#I')
 
-  tmux send-keys -t packing:0 "cd $code_location/warehouse-service && make run" C-m
-  tmux select-pane -t packing:0 -T "warehouse-service"
+  tmux rename-window 'develop-packing'
+  tmux send-keys -t $WINDOW "cd $code_location/warehouse-service && make run" C-m
+  tmux select-pane -t $WINDOW -T "warehouse-service"
 
-  tmux split-window -h -t packing:0
-  tmux send-keys -t packing:0.1 "cd $code_location/warehouse-sso && make run" C-m
-  tmux select-pane -t packing:0.1 -T "warehouse-sso"
+  tmux split-window -h -t $WINDOW
+  tmux send-keys -t $WINDOW.1 "cd $code_location/warehouse-sso && make run" C-m
+  tmux select-pane -t $WINDOW.1 -T "warehouse-sso"
 
-  tmux split-window -h -t packing:0
-  tmux send-keys -t packing:0.2 "cd $code_location/packing-service && make run" C-m
-  tmux select-pane -t packing:0.2 -T "packing-service"
+  tmux split-window -h -t $WINDOW
+  tmux send-keys -t $WINDOW.2 "cd $code_location/packing-service && make run" C-m
+  tmux select-pane -t $WINDOW.2 -T "packing-service"
 
-  tmux split-window -h -t packing:0
-  tmux send-keys -t packing:0.3 "cd $code_location/delivery-service && sleep 5 && make run" C-m
-  tmux select-pane -t packing:0.3 -T "delivery-service"
+  tmux split-window -h -t $WINDOW
+  tmux send-keys -t $WINDOW.3 "cd $code_location/delivery-service && sleep 5 && make run" C-m
+  tmux select-pane -t $WINDOW.3 -T "delivery-service"
 
-  tmux split-window -h -t packing:0
-  tmux send-keys -t packing:0.4 "cd $code_location/tails/warehouse && make run-packing" C-m
-  tmux select-pane -t packing:0.4 -T "tails-packing"
+  tmux split-window -h -t $WINDOW
+  tmux send-keys -t $WINDOW.4 "cd $code_location/tails/warehouse && make run-packing" C-m
+  tmux select-pane -t $WINDOW.4 -T "tails-packing"
 
   tmux select-layout -t packing tiled
   tmux attach -t packing
 }
 
 develop-bagging() {
-  set-title "develop-bagging"
   create-tails-network
 
-  tmux new-session -d -s bagging
+  WINDOW=$(tmux display-message -p '#S'):$(tmux display-message -p '#I')
 
-  tmux send-keys -t bagging:0 "cd $code_location/personalisation-service && make run" C-m
-  tmux select-pane -t bagging:0 -T "personalisation-service"
+  tmux rename-window 'deploy-adamm'
+  tmux send-keys -t $WINDOW "cd $code_location/printables-service && make run" C-m
+  tmux select-pane -t $WINDOW -T "printables-service"
 
-  tmux split-window -h -t bagging:0
-  tmux send-keys -t bagging:0.1 "cd $code_location/personalisation-service && sleep 5 && docker compose up celery" C-m
-  tmux select-pane -t bagging:0.1 -T "personalisation-celery"
+  tmux split-window -h -t $WINDOW
+  tmux send-keys -t $WINDOW.1 "cd $code_location/adamm-bagging && make run" C-m
+  tmux select-pane -t $WINDOW.1 -T "adamm-bagging"
 
-  tmux split-window -h -t bagging:0
-  tmux send-keys -t bagging:0.2 "cd $code_location/printables-service && make run" C-m
-  tmux select-pane -t bagging:0.2 -T "printables-service"
-
-  tmux split-window -h -t bagging:0
-  tmux send-keys -t bagging:0.3 "cd $code_location/adamm-bagging && make run" C-m
-  tmux select-pane -t bagging:0.3 -T "adamm-bagging"
-
-  tmux select-layout -t bagging tiled
-  tmux attach -t bagging
+  tmux select-layout -t tiled
 }
 
 develop-forklift() {
-  set-title "develop-forklift"
   create-tails-network
-  
-  tmux new-session -d -s forklift
 
-  tmux send-keys -t forklift:0 "cd $code_location/warehouse-service && make run" C-m
-  tmux select-pane -t forklift:0 -T "warehouse-service"
+  WINDOW=$(tmux display-message -p '#S'):$(tmux display-message -p '#I')
 
-  tmux split-window -h -t forklift:0
-  tmux send-keys -t forklift:0.1 "cd $code_location/tails/warehouse && make run-forklift" C-m
-  tmux select-pane -t forklift:0.1 -T "tails-forklift"
+  tmux rename-window 'develop-forklift'
+  tmux send-keys -t $WINDOW "cd $code_location/warehouse-service && make run" C-m
+  tmux select-pane -t $WINDOW -T "warehouse-service"
 
-  tmux select-layout -t forklift tiled
-  tmux attach -t forklift
+  tmux split-window -h -t $WINDOW
+  tmux send-keys -t $WINDOW.1 "cd $code_location/tails/warehouse && make run-forklift" C-m
+  tmux select-pane -t $WINDOW.1 -T "tails-forklift"
+
+  tmux select-layout -t tiled
+}
+
+develop-check-weigher() {
+  create-tails-network
+
+  WINDOW=$(tmux display-message -p '#S'):$(tmux display-message -p '#I')
+
+  tmux rename-window 'develop-check-weigher'
+  tmux send-keys -t $WINDOW "cd $code_location/tails/warehouse && docker compose up mysql api" C-m
+  tmux select-pane -t $WINDOW -T "tails"
+
+  tmux split-window -h -t $WINDOW
+  tmux send-keys -t $WINDOW.1 "cd $code_location/adamm && docker compose up adamm db nginx adamm-redis" C-m
+  tmux select-pane -t $WINDOW.1 -T "adamm"
+
+  tmux split-window -h -t $WINDOW
+  tmux send-keys -t $WINDOW.2 "cd $code_location/check-weigher && make run" C-m
+  tmux select-pane -t $WINDOW.2 -T "check-weigher"
+
+  tmux select-layout tiled
+}
+
+develop-edge() {
+  create-tails-network
+
+  WINDOW=$(tmux display-message -p '#S'):$(tmux display-message -p '#I')
+
+  tmux rename-window 'develop-edge'
+  tmux send-keys -t $WINDOW "cd $code_location/adamm-edge && sleep 5 && make virtual-adamm" C-m
+  tmux select-pane -t $WINDOW -T "virtual-adamm"
+
+  tmux split-window -h -t $WINDOW
+  tmux send-keys -t $WINDOW.1 "cd $code_location/adamm-edge && make rs-run-consumer" C-m
+  tmux select-pane -t $WINDOW.1 -T "weigher-consumer"
+
+  tmux split-window -h -t $WINDOW
+  tmux send-keys -t $WINDOW.2 "cd $code_location/adamm-edge && sleep 10 && make rs-run-weigher-manager" C-m
+  tmux select-pane -t $WINDOW.2 -T "weigher-manager"
+
+  tmux split-window -h -t $WINDOW
+  tmux send-keys -t $WINDOW.3 "cd $code_location/adamm-edge && sleep 5 && make virtual-weighers" C-m
+  tmux select-pane -t $WINDOW.3 -T "virtual-weighers"
+
+  tmux split-window -h -t $WINDOW
+  tmux send-keys -t $WINDOW.4 "cd $code_location/adamm-edge && make py-run" C-m
+  tmux select-pane -t $WINDOW.4 -T "conveyor-server"
+
+  tmux select-layout tiled
 }
