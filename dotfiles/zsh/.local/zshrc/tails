@@ -117,19 +117,14 @@ develop-packing() {
   tmux select-pane -t $WINDOW.1 -T "warehouse-sso"
 
   tmux split-window -h -t $WINDOW
-  tmux send-keys -t $WINDOW.2 "cd $code_location/packing-service && make run" C-m
-  tmux select-pane -t $WINDOW.2 -T "packing-service"
+  tmux send-keys -t $WINDOW.2 "cd $code_location/delivery-service && sleep 5 && make run" C-m
+  tmux select-pane -t $WINDOW.2 -T "delivery-service"
 
   tmux split-window -h -t $WINDOW
-  tmux send-keys -t $WINDOW.3 "cd $code_location/delivery-service && sleep 5 && make run" C-m
-  tmux select-pane -t $WINDOW.3 -T "delivery-service"
+  tmux send-keys -t $WINDOW.3 "cd $code_location/tails/warehouse && make run-packing" C-m
+  tmux select-pane -t $WINDOW.3 -T "tails-packing"
 
-  tmux split-window -h -t $WINDOW
-  tmux send-keys -t $WINDOW.4 "cd $code_location/tails/warehouse && make run-packing" C-m
-  tmux select-pane -t $WINDOW.4 -T "tails-packing"
-
-  tmux select-layout -t packing tiled
-  tmux attach -t packing
+  tmux select-layout tiled
 }
 
 develop-bagging() {
@@ -137,7 +132,7 @@ develop-bagging() {
 
   WINDOW=$(tmux display-message -p '#S'):$(tmux display-message -p '#I')
 
-  tmux rename-window 'deploy-adamm'
+  tmux rename-window 'develop-bagging'
   tmux send-keys -t $WINDOW "cd $code_location/printables-service && make run" C-m
   tmux select-pane -t $WINDOW -T "printables-service"
 
@@ -145,7 +140,7 @@ develop-bagging() {
   tmux send-keys -t $WINDOW.1 "cd $code_location/adamm-bagging && make run" C-m
   tmux select-pane -t $WINDOW.1 -T "adamm-bagging"
 
-  tmux select-layout -t tiled
+  tmux select-layout tiled
 }
 
 develop-forklift() {
